@@ -1,0 +1,950 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Integration Tutorial — Tamar Auber</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background: #080d1a;
+        color: #fff;
+        font-family: 'Barlow', sans-serif;
+        min-height: 100vh;
+      }
+
+      nav {
+        padding: 1.5rem 4rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      nav a {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: rgba(255, 255, 255, 0.45);
+        text-decoration: none;
+        font-size: 0.78rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-weight: 600;
+        transition: color 0.2s;
+      }
+
+      nav a:hover {
+        color: #a678ff;
+      }
+      nav a svg {
+        width: 13px;
+        height: 13px;
+        transition: transform 0.2s;
+      }
+      nav a:hover svg {
+        transform: translateX(-3px);
+      }
+      nav .divider {
+        color: rgba(255, 255, 255, 0.15);
+        font-size: 0.7rem;
+      }
+      nav .current {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-weight: 400;
+      }
+
+      .hero {
+        padding: 3rem 4rem 2.5rem;
+        max-width: 960px;
+      }
+
+      .hero-tag {
+        font-size: 0.72rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: #a678ff;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+      }
+
+      .hero h1 {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: clamp(2rem, 4vw, 3.2rem);
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        line-height: 1.05;
+        margin-bottom: 1.5rem;
+      }
+      .hero h1 span {
+        color: #a678ff;
+      }
+
+      .meta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        padding: 1.25rem 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .meta-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+      }
+      .meta-label {
+        font-size: 0.65rem;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.35);
+        font-weight: 600;
+      }
+      .meta-value {
+        font-size: 0.88rem;
+        color: rgba(255, 255, 255, 0.8);
+        font-weight: 500;
+      }
+
+      .white-section {
+        background: #fff;
+        padding: 3.5rem 0 5rem;
+      }
+      .white-inner {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      .portfolio-note {
+        background: #f9f9f9;
+        border: 1px solid #e8e8e8;
+        padding: 0.75rem 1rem;
+        margin-bottom: 2.5rem;
+        font-size: 0.82rem;
+        color: #999;
+        line-height: 1.5;
+      }
+
+      .ws-section {
+        margin-bottom: 2.5rem;
+        padding-bottom: 2.5rem;
+        border-bottom: 1px solid #ebebeb;
+      }
+      .ws-section:last-of-type {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+
+      .part-heading {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: 1.55rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: #0f1628;
+        line-height: 1.1;
+        margin-bottom: 0.3rem;
+      }
+      .part-meta {
+        font-size: 0.8rem;
+        color: #aaa;
+        margin-bottom: 1.5rem;
+      }
+
+      .ws-heading {
+        font-size: 0.67rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #a678ff;
+        margin-bottom: 0.8rem;
+        margin-top: 1.6rem;
+      }
+      .ws-heading:first-child {
+        margin-top: 0;
+      }
+
+      .white-section p {
+        font-size: 0.97rem;
+        line-height: 1.78;
+        color: #333;
+        margin-bottom: 0.9rem;
+      }
+      .white-section p:last-child {
+        margin-bottom: 0;
+      }
+      .white-section strong {
+        color: #111;
+        font-weight: 600;
+      }
+      .white-section em {
+        font-style: italic;
+      }
+
+      .plain-list {
+        list-style: none;
+        margin: 0.5rem 0 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+        padding-left: 1rem;
+      }
+      .plain-list li {
+        font-size: 0.95rem;
+        color: #333;
+        line-height: 1.6;
+        position: relative;
+      }
+      .plain-list li::before {
+        content: '–';
+        position: absolute;
+        left: -1rem;
+        color: #bbb;
+      }
+      .plain-list li strong {
+        color: #111;
+        font-weight: 600;
+      }
+
+      .callout {
+        padding: 0.85rem 1rem;
+        margin: 1rem 0;
+        font-size: 0.92rem;
+        line-height: 1.65;
+        color: #333;
+      }
+      .callout.info {
+        background: #f4f7ff;
+        border-left: 3px solid #a678ff;
+      }
+      .callout.warn {
+        background: #fdf6ec;
+        border-left: 3px solid #e8a020;
+        color: #3a2e10;
+      }
+      .callout.success {
+        background: #f0faf5;
+        border-left: 3px solid #2db87a;
+      }
+      .callout-label {
+        font-size: 0.63rem;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        font-weight: 700;
+        margin-bottom: 0.3rem;
+      }
+      .callout.info .callout-label {
+        color: #6a3fbf;
+      }
+      .callout.warn .callout-label {
+        color: #a06010;
+      }
+
+      .flow-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1rem 0;
+        font-size: 0.92rem;
+      }
+      .flow-table th {
+        font-size: 0.63rem;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        color: #999;
+        font-weight: 700;
+        text-align: left;
+        padding: 0.5rem 0.85rem;
+        background: #f7f7f9;
+        border-bottom: 1px solid #e4e4e8;
+      }
+      .flow-table td {
+        padding: 0.8rem 0.85rem;
+        border-bottom: 1px solid #f0f0f4;
+        color: #333;
+        line-height: 1.55;
+        vertical-align: top;
+      }
+      .flow-table tr:last-child td {
+        border-bottom: none;
+      }
+      .flow-table td:first-child {
+        font-weight: 700;
+        color: #a678ff;
+        width: 28px;
+        font-size: 0.88rem;
+      }
+      .flow-table td:nth-child(2) {
+        font-weight: 600;
+        color: #111;
+        width: 150px;
+        white-space: nowrap;
+      }
+
+      .steps {
+        margin: 1rem 0;
+      }
+      .step {
+        padding: 1.1rem 0;
+        border-bottom: 1px solid #f0f0f4;
+      }
+      .step:last-child {
+        border-bottom: none;
+      }
+      .step-header {
+        display: flex;
+        align-items: baseline;
+        gap: 0.75rem;
+        margin-bottom: 0.6rem;
+      }
+      .step-num {
+        font-size: 0.67rem;
+        font-weight: 700;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        color: #a678ff;
+        white-space: nowrap;
+      }
+      .step-title {
+        font-size: 0.97rem;
+        font-weight: 600;
+        color: #111;
+      }
+      .step ol {
+        padding-left: 1.25rem;
+        margin: 0.5rem 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+      }
+      .step ol li {
+        font-size: 0.93rem;
+        color: #333;
+        line-height: 1.6;
+        padding-left: 0.25rem;
+      }
+
+      .cred-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 0.75rem 0;
+        font-size: 0.9rem;
+      }
+      .cred-table th {
+        font-size: 0.63rem;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        color: #999;
+        font-weight: 700;
+        text-align: left;
+        padding: 0.45rem 0.85rem;
+        background: #f7f7f9;
+        border-bottom: 1px solid #e4e4e8;
+      }
+      .cred-table td {
+        padding: 0.65rem 0.85rem;
+        border-bottom: 1px solid #f0f0f4;
+        color: #333;
+        vertical-align: top;
+      }
+      .cred-table tr:last-child td {
+        border-bottom: none;
+      }
+      .cred-table td:first-child {
+        font-weight: 600;
+        color: #111;
+        width: 140px;
+      }
+
+      code {
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 0.84em;
+        background: #f2f2f5;
+        color: #3a1f7a;
+        padding: 2px 5px;
+        border-radius: 2px;
+      }
+
+      .url-row {
+        margin: 0.6rem 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+      }
+      .url-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.88rem;
+        color: #333;
+      }
+      .url-ok {
+        color: #2db87a;
+        font-weight: 700;
+      }
+      .url-no {
+        color: #e24b4a;
+        font-weight: 700;
+      }
+
+      .trouble-item {
+        padding: 1rem 0;
+        border-bottom: 1px solid #f0f0f4;
+      }
+      .trouble-item:last-child {
+        border-bottom: none;
+      }
+      .trouble-title {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: #111;
+        margin-bottom: 0.2rem;
+      }
+      .trouble-cause {
+        font-size: 0.78rem;
+        color: #aaa;
+        letter-spacing: 0.04em;
+        margin-bottom: 0.5rem;
+      }
+      .trouble-fix {
+        list-style: none;
+        padding-left: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+      }
+      .trouble-fix li {
+        font-size: 0.9rem;
+        color: #444;
+        line-height: 1.55;
+        position: relative;
+      }
+      .trouble-fix li::before {
+        content: '–';
+        position: absolute;
+        left: -1rem;
+        color: #ccc;
+      }
+
+      hr.part-divider {
+        border: none;
+        border-top: 2px solid #ebebeb;
+        margin: 3rem 0 2.5rem;
+      }
+
+      @media (max-width: 768px) {
+        nav,
+        .hero {
+          padding-left: 1.5rem;
+          padding-right: 1.5rem;
+        }
+        .white-inner {
+          padding: 0 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="portfolio-cards.html">
+        <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M13 7H1M6 2L1 7l5 5"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        Portfolio
+      </a>
+      <span class="divider">/</span>
+      <span class="current">Integration Tutorial</span>
+    </nav>
+
+    <div class="hero">
+      <div class="hero-tag">
+        Technical Writing · Playbook · Systems Integration
+      </div>
+      <h1>
+        The Integration Map<br /><span>Runbook &amp; System Overview</span>
+      </h1>
+      <div class="meta-row">
+        <div class="meta-item">
+          <span class="meta-label">Doc Types</span>
+          <span class="meta-value">Conceptual Overview · Procedural Guide</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Audience</span>
+          <span class="meta-value">Integration Engineers · DevOps</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Context</span>
+          <span class="meta-value"
+            >Two samples from a master integration playbook</span
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="white-section">
+      <div class="white-inner">
+        <div class="portfolio-note">
+          Product names, domain names, and vendor-specific identifiers have been
+          generalized for portfolio use. Documentation structure, technical
+          depth, and integration patterns reflect original work.
+        </div>
+
+        <div class="ws-section">
+          <div class="part-heading">ARIA Integration — System Overview</div>
+          <div class="part-meta">
+            Conceptual overview &nbsp;·&nbsp; Reading time: 4 minutes
+            &nbsp;·&nbsp; Audience: New integration developers
+          </div>
+
+          <div class="ws-heading">Learning Objective</div>
+          <p>
+            Understand how ARIA connects a chat interface to a workflow
+            automation platform — so users can trigger backend processes through
+            conversation and get results without leaving their chat window.
+          </p>
+
+          <div class="ws-heading">Prerequisites</div>
+          <p>Familiarity with the following is helpful but not required:</p>
+          <ul class="plain-list">
+            <li>
+              <strong>APIs</strong> — Systems exchange data through structured
+              requests and responses
+            </li>
+            <li>
+              <strong>Webhooks</strong> — Event-driven HTTP requests that push
+              data between systems
+            </li>
+            <li>
+              <strong>JSON</strong> — Structured data format for API
+              communication
+            </li>
+            <li>
+              <strong>Parameters</strong> — Discrete pieces of information
+              collected from users
+            </li>
+          </ul>
+
+          <div class="ws-heading">What This Integration Accomplishes</div>
+          <p>
+            ARIA connects HelixBot (a conversational AI platform) to FlowEngine
+            (a workflow automation platform). A user types a request in chat,
+            HelixBot collects what it needs, and FlowEngine runs the workflow —
+            all without the user touching another system.
+          </p>
+          <div class="callout info">
+            <div class="callout-label">Key Capability</div>
+            Users interact with enterprise systems using natural language in
+            HelixBot, without leaving the chat window.
+          </div>
+
+          <div class="ws-heading">
+            How HelixBot and FlowEngine Work Together
+          </div>
+          <p>
+            <strong>HelixBot</strong> is the front end. It interprets what the
+            user is asking, asks any follow-up questions, and packages the
+            user's input into a structured request.
+          </p>
+          <p>
+            <strong>FlowEngine</strong> is the back end. It receives that
+            request, runs the workflow, and sends the result back to HelixBot to
+            display in chat.
+          </p>
+          <p>
+            The two systems talk to each other via webhook. HelixBot sends a
+            JSON payload to FlowEngine's API, holds the conversation open, and
+            displays whatever FlowEngine returns. The user sees only the result
+            — the plumbing is invisible.
+          </p>
+
+          <div class="ws-heading">The Complete Flow</div>
+          <p>
+            What happens when a user types
+            <em>"I need to reset my password"</em>:
+          </p>
+          <table class="flow-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Stage</th>
+                <th>What happens</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>User Trigger</td>
+                <td>
+                  The user types a request. HelixBot's intent prediction matches
+                  it to the "password reset" workflow.
+                </td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Information Gathering</td>
+                <td>
+                  HelixBot collects required data through conversation or user
+                  profile data. Answers become the input parameters sent to
+                  FlowEngine.
+                </td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Data Transformation</td>
+                <td>
+                  HelixBot packages all inputs and session context into the JSON
+                  format FlowEngine expects. A mapping script handles the
+                  translation automatically.
+                </td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Webhook Sent</td>
+                <td>
+                  HelixBot sends the structured payload to FlowEngine's Events
+                  API endpoint and holds the conversation open.
+                </td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>Workflow Execution</td>
+                <td>
+                  FlowEngine receives the request, routes it to the correct
+                  workflow, executes it, and packages the result.
+                </td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>Callback &amp; Display</td>
+                <td>
+                  FlowEngine sends the result back via the callback URL. The
+                  response appears in the user's chat:
+                  <em>✓ Password reset successfully.</em>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <p>Total time: typically 5–15 seconds from start to finish.</p>
+
+          <div class="ws-heading">What You Can Build</div>
+          <p>
+            This integration supports any workflow that collects structured
+            input through conversation, executes a FlowEngine workflow, and
+            returns a result to the user. Common use cases include password
+            resets and account unlocks, software access requests, approval
+            workflows, and system status checks.
+          </p>
+          <p>
+            Clone and customize the pre-built templates for each new use case.
+            Most implementations take 30–60 minutes per workflow, and the
+            consistent template structure ensures every integration behaves the
+            same way.
+          </p>
+        </div>
+
+        <hr class="part-divider" />
+
+        <div class="ws-section">
+          <div class="part-heading">
+            Configure the ITSM Platform Reverse Connection
+          </div>
+          <div class="part-meta">
+            Procedural guide &nbsp;·&nbsp; Estimated time: 15–20 minutes
+            &nbsp;·&nbsp; Audience: ITSM Platform admins
+          </div>
+
+          <p>
+            At this point, HelixBot can send requests to the ITSM Platform. This
+            guide sets up the other direction — so the ITSM Platform can send
+            data back to HelixBot. You'll work entirely inside the ITSM Platform
+            interface. Before you start, confirm that the prior setup step
+            (committing the Helix update set) is complete.
+          </p>
+
+          <div class="ws-heading">Prerequisites</div>
+          <ul class="plain-list">
+            <li>HelixBot configuration completed</li>
+            <li>Helix update set committed in the ITSM Platform</li>
+            <li>ITSM integration user password on hand</li>
+            <li>HelixBot tenant URL on hand</li>
+          </ul>
+
+          <div class="ws-heading">Steps</div>
+          <div class="steps">
+            <div class="step">
+              <div class="step-header">
+                <span class="step-num">Step 1</span>
+                <span class="step-title">Log in to the ITSM Platform</span>
+              </div>
+              <div class="callout warn">
+                <div class="callout-label">Important</div>
+                All steps below happen in the ITSM Platform — not in HelixBot.
+              </div>
+              <ol>
+                <li>Open your ITSM Platform instance in a browser.</li>
+                <li>
+                  URL format: <code>https://[instance].itsm-platform.com</code>
+                </li>
+                <li>Log in with your ITSM Platform admin credentials.</li>
+              </ol>
+            </div>
+
+            <div class="step">
+              <div class="step-header">
+                <span class="step-num">Step 2</span>
+                <span class="step-title"
+                  >Open the Helix Integration Settings module</span
+                >
+              </div>
+              <ol>
+                <li>
+                  In the ITSM Platform Navigator, type: <code>Helix</code>
+                </li>
+                <li>Locate the Helix application modules in the results.</li>
+                <li>Click <strong>Helix &gt; Integration Settings</strong>.</li>
+              </ol>
+              <p>You should see a form titled "Integration Settings."</p>
+            </div>
+
+            <div class="step">
+              <div class="step-header">
+                <span class="step-num">Step 3</span>
+                <span class="step-title"
+                  >Enter HelixBot connection credentials</span
+                >
+              </div>
+              <table class="cred-table">
+                <thead>
+                  <tr>
+                    <th>Field</th>
+                    <th>Value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Username</td>
+                    <td><code>helix.integration</code></td>
+                  </tr>
+                  <tr>
+                    <td>Password</td>
+                    <td>
+                      The integration user password from your prior setup step
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Base URL</td>
+                    <td>
+                      <code
+                        >https://&#123;tenant&#125;.helix-platform.com/</code
+                      >
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="callout warn">
+                <div class="callout-label">Don't forget the trailing slash</div>
+                A missing trailing slash is the most common cause of connection
+                failure.
+                <div class="url-row" style="margin-top: 0.5rem">
+                  <div class="url-item">
+                    <span class="url-ok">✓</span>
+                    <code>https://acme.helix-platform.com/</code>
+                  </div>
+                  <div class="url-item">
+                    <span class="url-no">✗</span>
+                    <code>https://acme.helix-platform.com</code>
+                  </div>
+                </div>
+              </div>
+              <p>
+                Click <strong>Save</strong> or <strong>Submit</strong>. Settings
+                should save without errors.
+              </p>
+            </div>
+
+            <div class="step">
+              <div class="step-header">
+                <span class="step-num">Step 4</span>
+                <span class="step-title"
+                  >Open the Helix Integration Hub module</span
+                >
+              </div>
+              <ol>
+                <li>
+                  In the ITSM Platform Navigator, type: <code>Helix</code>
+                </li>
+                <li>Click <strong>Helix &gt; Integration Hub</strong>.</li>
+              </ol>
+              <p>
+                You should see a <strong>Test Connection</strong> or
+                <strong>Test/Refresh Connection</strong> button.
+              </p>
+            </div>
+
+            <div class="step">
+              <div class="step-header">
+                <span class="step-num">Step 5</span>
+                <span class="step-title">Test the connection</span>
+              </div>
+              <ol>
+                <li>Click <strong>Test/Refresh Connection</strong>.</li>
+                <li>Wait 5–10 seconds.</li>
+                <li>Look for a success message in the interface.</li>
+              </ol>
+              <div class="callout success">
+                <strong>Bidirectional connection complete.</strong> HelixBot →
+                ITSM Platform and ITSM Platform → HelixBot. The two systems can
+                now communicate bidirectionally for ticket creation and data
+                exchange.
+              </div>
+            </div>
+          </div>
+
+          <div class="ws-heading">Troubleshooting</div>
+
+          <div class="trouble-item">
+            <div class="trouble-title">
+              Connection test fails — Missing roles
+            </div>
+            <div class="trouble-cause">
+              Cause: Integration user missing required roles
+            </div>
+            <ul class="trouble-fix">
+              <li>
+                Verify all three Helix roles were assigned to the integration
+                user.
+              </li>
+              <li>
+                Confirm the user also has the <code>itil</code> role if required
+                by your instance.
+              </li>
+              <li>
+                Verify <strong>Password needs reset</strong> is unchecked on the
+                user record.
+              </li>
+            </ul>
+          </div>
+
+          <div class="trouble-item">
+            <div class="trouble-title">
+              Connection test fails — Authentication error
+            </div>
+            <div class="trouble-cause">
+              Cause: Incorrect username or password
+            </div>
+            <ul class="trouble-fix">
+              <li>
+                Verify the username is exactly: <code>helix.integration</code>
+              </li>
+              <li>
+                Verify the password matches what was set during integration user
+                setup.
+              </li>
+              <li>
+                Verify <strong>Password needs reset</strong> is unchecked.
+              </li>
+            </ul>
+          </div>
+
+          <div class="trouble-item">
+            <div class="trouble-title">Connection test fails — URL error</div>
+            <div class="trouble-cause">Cause: Missing trailing slash</div>
+            <ul class="trouble-fix">
+              <li>
+                The URL must include <code>https://</code> and end with a
+                trailing slash.
+              </li>
+            </ul>
+            <div class="url-row" style="margin-top: 0.5rem; padding-left: 1rem">
+              <div class="url-item">
+                <span class="url-ok">✓</span>
+                <code>https://acme.helix-platform.com/</code>
+              </div>
+              <div class="url-item">
+                <span class="url-no">✗</span>
+                <code>https://acme.helix-platform.com</code>
+              </div>
+            </div>
+          </div>
+
+          <div class="trouble-item">
+            <div class="trouble-title">
+              Connection test fails — Network error
+            </div>
+            <div class="trouble-cause">
+              Cause: Firewall or network configuration
+            </div>
+            <ul class="trouble-fix">
+              <li>
+                Verify the ITSM Platform instance can reach external URLs.
+              </li>
+              <li>Contact your network admin if needed.</li>
+            </ul>
+          </div>
+
+          <div class="trouble-item">
+            <div class="trouble-title">Cannot save settings</div>
+            <div class="trouble-cause">Cause: Wrong application scope</div>
+            <ul class="trouble-fix">
+              <li>
+                Look for a banner prompting you to switch application scope.
+              </li>
+              <li>
+                Switch to the Helix application scope, re-enter settings, and
+                save.
+              </li>
+            </ul>
+          </div>
+
+          <div class="trouble-item">
+            <div class="trouble-title">No response from test</div>
+            <div class="trouble-cause">Cause: HelixBot tenant unreachable</div>
+            <ul class="trouble-fix">
+              <li>
+                Verify the HelixBot tenant is accessible by opening it directly
+                in a browser.
+              </li>
+              <li>Wait 1–2 minutes and try the test again.</li>
+            </ul>
+          </div>
+
+          <div class="trouble-item">
+            <div class="trouble-title">Helix modules not visible</div>
+            <div class="trouble-cause">
+              Cause: Update set not committed or browser cache
+            </div>
+            <ul class="trouble-fix">
+              <li>
+                Verify the update set status shows <strong>Committed</strong>.
+              </li>
+              <li>Hard refresh your browser (<code>Ctrl+Shift+R</code>).</li>
+              <li>Log out and back in to the ITSM Platform.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

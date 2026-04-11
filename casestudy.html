@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Study — Tamar Auber</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #080d1a;
+    color: #fff;
+    font-family: 'Barlow', sans-serif;
+    min-height: 100vh;
+  }
+
+  /* ── Nav ── */
+  nav {
+    padding: 1.5rem 4rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  nav a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(255,255,255,0.45);
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: color 0.2s;
+  }
+
+  nav a:hover { color: #6b9fff; }
+
+  nav a svg {
+    width: 13px; height: 13px;
+    transition: transform 0.2s;
+  }
+
+  nav a:hover svg { transform: translateX(-3px); }
+
+  nav .divider {
+    color: rgba(255,255,255,0.15);
+    font-size: 0.7rem;
+  }
+
+  nav .current {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    padding: 3rem 4rem 2rem;
+    max-width: 960px;
+  }
+
+  .hero-tag {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #6b9fff;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+  }
+
+  .hero h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 span {
+    color: #6b9fff;
+  }
+
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 1.25rem 0;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 2.5rem;
+  }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .meta-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    font-weight: 600;
+  }
+
+  .meta-value {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.8);
+    font-weight: 500;
+  }
+
+  /* ── GIF placeholder ── */
+  .gif-block {
+    margin: 0 4rem 3rem;
+    background: #0f1628;
+    border: 1px solid rgba(107,159,255,0.15);
+    border-top: 3px solid #6b9fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 360px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .gif-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    color: rgba(255,255,255,0.2);
+    text-align: center;
+  }
+
+  .gif-placeholder svg {
+    width: 48px; height: 48px;
+    opacity: 0.3;
+  }
+
+  .gif-placeholder p {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  /* swap this class out when you have the GIF */
+  .gif-block img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* ── Content body ── */
+  .content {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 4rem 5rem;
+  }
+
+  /* Stat bar */
+  .stat-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.06);
+    margin-bottom: 3.5rem;
+  }
+
+  .stat-cell {
+    background: #0f1628;
+    padding: 1.5rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .stat-number {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #6b9fff;
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+
+  .stat-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.3;
+  }
+
+  /* Sections */
+  .section {
+    margin-bottom: 2.75rem;
+  }
+
+  .section-heading {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #6b9fff;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid rgba(107,159,255,0.2);
+  }
+
+  .section p {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.72);
+    margin-bottom: 1rem;
+  }
+
+  .section p:last-child { margin-bottom: 0; }
+
+  .section p strong {
+    color: rgba(255,255,255,0.92);
+    font-weight: 600;
+  }
+
+  /* Pull quote */
+  .pull-quote {
+    border-left: 3px solid #6b9fff;
+    padding: 0.75rem 1.25rem;
+    margin: 1.5rem 0;
+    background: rgba(107,159,255,0.06);
+  }
+
+  .pull-quote p {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: rgba(255,255,255,0.85) !important;
+    line-height: 1.4;
+    margin: 0 !important;
+  }
+
+  /* Constraint callout */
+  .callout {
+    background: rgba(255,179,71,0.07);
+    border: 1px solid rgba(255,179,71,0.2);
+    border-left: 3px solid #ffb347;
+    padding: 1rem 1.25rem;
+    margin: 1.25rem 0;
+  }
+
+  .callout-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: #ffb347;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+  }
+
+  .callout p {
+    font-size: 0.93rem;
+    color: rgba(255,255,255,0.72);
+    line-height: 1.6;
+    margin: 0 !important;
+  }
+
+  /* CTA */
+  .cta-row {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    flex-wrap: wrap;
+  }
+
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #6b9fff;
+    color: #080d1a;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    transition: background 0.2s, gap 0.2s;
+  }
+
+  .cta-btn:hover {
+    background: #92b8ff;
+    gap: 0.75rem;
+  }
+
+  .cta-btn svg { width: 13px; height: 13px; }
+
+  .cta-note {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 768px) {
+    nav, .hero, .content { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .gif-block { margin-left: 1.5rem; margin-right: 1.5rem; }
+    .stat-bar { grid-template-columns: repeat(2, 1fr); }
+    .hero h1 { font-size: 2rem; }
+  }
+
+  /* ── White section ── */
+  .white-section {
+    background: #fff;
+    padding: 4rem 0 5rem;
+  }
+
+  .white-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .ws-section {
+    margin-bottom: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid #e8e8e8;
+  }
+
+  .ws-section:last-of-type {
+    border-bottom: none;
+  }
+
+  .ws-heading {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #6b9fff;
+    margin-bottom: 1rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid #e0eaff;
+  }
+
+  .white-section p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #2a2f3d;
+    margin-bottom: 1rem;
+  }
+
+  .white-section p:last-child { margin-bottom: 0; }
+
+  .white-section strong {
+    color: #111;
+    font-weight: 600;
+  }
+
+  .white-section em {
+    font-style: italic;
+    color: #444;
+  }
+
+  .ws-callout {
+    background: #fdf6ec;
+    border-left: 3px solid #ffb347;
+    padding: 1rem 1.25rem;
+    margin: 1.25rem 0;
+  }
+
+  .ws-callout-label {
+    font-size: 0.63rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: #c8831a;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+  }
+
+  .ws-callout p {
+    font-size: 0.93rem;
+    color: #3a3020;
+    margin: 0 !important;
+    line-height: 1.65;
+  }
+
+  .ws-outcomes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 1.25rem;
+  }
+
+  .ws-outcome {
+    background: #f4f7ff;
+    padding: 1.25rem;
+    border-top: 2px solid #6b9fff;
+  }
+
+  .ws-outcome-number {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    color: #1a2a6b;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  .ws-outcome-text {
+    font-size: 0.82rem;
+    color: #555;
+    line-height: 1.5;
+  }
+
+  .ws-closing {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    line-height: 1.4;
+    color: #0f1628;
+    border-left: 3px solid #6b9fff;
+    padding: 0.75rem 1.25rem;
+    background: #f4f7ff;
+    margin-top: 2.5rem;
+  }
+
+  @media (max-width: 600px) {
+    .ws-outcomes { grid-template-columns: 1fr; }
+    .white-inner { padding: 0 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+  <a href="portfolio-cards.html">
+    <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M13 7H1M6 2L1 7l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Portfolio
+  </a>
+  <span class="divider">/</span>
+  <span class="current">Case Study</span>
+</nav>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-tag">Case Study · AI / RAG Architecture · Resolve Systems</div>
+  <h1>Building a documentation chatbot<br><span>that actually works</span></h1>
+
+  <div class="meta-row">
+    <div class="meta-item">
+      <span class="meta-label">Role</span>
+      <span class="meta-value">Technical Writer &amp; DocOps</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Stack</span>
+      <span class="meta-value">Python · Google Cloud · Zendesk API · React</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Scope</span>
+      <span class="meta-value">Highest-traffic documentation site</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Outcome</span>
+      <span class="meta-value">30% reduction in support tickets</span>
+    </div>
+  </div>
+</div>
+
+<!-- GIF Block -->
+<div class="gif-block">
+  <!-- Replace the placeholder below with: <img src="your-demo.gif" alt="RANI chatbot demo"> -->
+  <div class="gif-placeholder">
+    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="6" y="10" width="36" height="28" rx="3" stroke="white" stroke-width="2"/>
+      <circle cx="24" cy="24" r="8" stroke="white" stroke-width="2"/>
+      <path d="M21 20l8 4-8 4V20Z" fill="white" opacity="0.5"/>
+    </svg>
+    <p>Demo GIF — drop in when ready</p>
+  </div>
+</div>
+
+<!-- Content -->
+<div class="content">
+
+  <!-- Stats -->
+  <div class="stat-bar">
+    <div class="stat-cell">
+      <div class="stat-number">30%</div>
+      <div class="stat-label">Reduction in support tickets after launch</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-number">27%→&lt;9%</div>
+      <div class="stat-label">Fail rate improvement via thumbs up/down feedback</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-number">3</div>
+      <div class="stat-label">Custom RAG chatbots in production</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-number">92%</div>
+      <div class="stat-label">Increase in chatbot usage after launch</div>
+    </div>
+  </div>
+
+  <!-- The Problem -->
+  <div class="section">
+    <div class="section-heading">The Problem</div>
+    <p>Enterprise documentation at scale creates a self-service gap. Users have questions. The answers exist somewhere in the docs. But <strong>somewhere isn't good enough</strong> when you're trying to resolve a critical issue fast.</p>
+    <p>Users were bypassing the docs entirely and going straight to the support team — pushing resolution times out by days. The vendor solution made it worse: a general-purpose chatbot struggled with deeply nested technical documentation, producing misleading or hallucinated answers at a <strong>27% fail rate</strong> — even on simple requests. It also couldn't surface step-by-step content from the support knowledge base, leaving a significant portion of available answers unreachable except by contacting support directly.</p>
+  </div>
+
+  <!-- The Constraint -->
+  <div class="section">
+    <div class="section-heading">The Design Constraint That Mattered</div>
+    <div class="callout">
+      <div class="callout-label">Hard Requirement</div>
+      <p>Every answer had to be grounded strictly in versioned product documentation. No improvisation. No answers from outside the knowledge base. A user following bad instructions can break a production workflow — and set them back for days.</p>
+    </div>
+    <p>This ruled out general-purpose AI entirely. The solution had to be built from the ground up around retrieval, not generation.</p>
+  </div>
+
+  <!-- The Approach -->
+  <div class="section">
+    <div class="section-heading">The Approach</div>
+    <p>This was the second generation of the chatbot. The original vendor solution never performed reliably enough, so I spent time iterating across four product lines to understand its ceiling before replacing it. That failed experiment produced crucial insight into what the users actually needed.</p>
+    <p>I rebuilt the chatbots from the ground up in Python on Google Cloud using a <strong>RAG (retrieval-augmented generation)</strong> architecture — retrieving answers from actual versioned documentation before generating a response, then surfacing inline source citations so users could verify exactly where the answer came from and navigate directly to the relevant page.</p>
+    <p>For deeper troubleshooting, the chatbot integrates with the <strong>Zendesk API</strong> to search support articles — version-aware, so a user on version 8.0 gets results tied to their version, not a newer release that might not apply.</p>
+
+    <div class="pull-quote">
+      <p>"Shipping AI-powered documentation tooling isn't just a writing problem or just an engineering problem. It sits at the intersection — and that's exactly where I work."</p>
+    </div>
+  </div>
+
+  <!-- Making It Reliable -->
+  <div class="section">
+    <div class="section-heading">Making It Reliable</div>
+    <p>Shipping it was one problem. <strong>Trusting it was another.</strong> I ran adversarial testing to surface failure patterns — edge cases, prompt gaps, and retrieval failures — before users could find them first.</p>
+    <p>I also implemented a thumbs up/down feedback loop so real usage data could drive continuous improvement after launch. The support team reported faster knowledge retrieval and measurably higher-quality answers within the first cycle.</p>
+  </div>
+
+</div>
+
+<!-- ── White content section ── -->
+<div class="white-section">
+  <div class="white-inner">
+
+    <div class="ws-section">
+      <div class="ws-heading">The Problem</div>
+      <p>Enterprise documentation at scale creates a self-service gap. Users have questions. The answers exist somewhere in the docs. But <em>somewhere</em> isn't good enough when you're trying to resolve a critical issue or find a solution fast.</p>
+      <p>As a result, users were turning to the support team to find answers that existed in the docs. This increased the burden on support staff and pushed resolution times out, sometimes by days. The out-of-the-box solution made it worse: a general-purpose chatbot purchased from a vendor struggled with deeply nested documentation and highly technical language, producing misleading or outright hallucinated answers at a <strong>27% fail rate</strong> — even on simple requests. The vendor also had no way to surface the richer step-by-step content in the support knowledge base, leaving a significant portion of available answers unreachable, except by contacting support.</p>
+    </div>
+
+    <div class="ws-section">
+      <div class="ws-heading">The Constraint That Mattered</div>
+      <p>It was clear that a general-purpose chatbot wasn't the answer. The consequence of a hallucination — a confident, plausible, wrong answer — can be dire when documentation is aimed at IT professionals working on enterprise systems. A user following bad instructions can break a production workflow and set them back for days.</p>
+      <div class="ws-callout">
+        <div class="ws-callout-label">Design Requirement</div>
+        <p>Every answer had to be grounded strictly in versioned product documentation. No improvisation. No answers from outside the knowledge base. The bot needed to be grounded in the actual docs.</p>
+      </div>
+    </div>
+
+    <div class="ws-section">
+      <div class="ws-heading">The Approach</div>
+      <p>This was the second generation of the chatbot. The original vendor solution never performed well enough to be reliable, so I spent time iterating on and improving it across four product lines before ultimately replacing it entirely. This failed experiment gave me crucial insights into the limitations of the current model and the features users actually needed. Then I rebuilt the chatbots from the ground up in Python on Google Cloud.</p>
+      <p>The custom solution uses a <strong>RAG (retrieval-augmented generation)</strong> architecture — retrieving answers from the actual docs before generating a response, then surfacing inline source citations so users can verify exactly where the answer came from and navigate directly to the relevant page.</p>
+      <p>For deeper troubleshooting, the chatbot integrates with the <strong>Zendesk API</strong> to search support articles — version-aware, so a user on version 8.0 gets results tied to their version, not a newer release that might not apply.</p>
+    </div>
+
+    <div class="ws-section">
+      <div class="ws-heading">Making It Reliable</div>
+      <p>Shipping it was one problem. Trusting it was another. I ran adversarial testing to surface failure patterns — edge cases, prompt gaps, and retrieval failures — before users could find them first. I also implemented a thumbs up/down feedback loop so real usage data could drive continuous improvements after launch.</p>
+    </div>
+
+    <div class="ws-section">
+      <div class="ws-heading">The Outcome</div>
+      <div class="ws-outcomes">
+        <div class="ws-outcome">
+          <div class="ws-outcome-number">30%</div>
+          <div class="ws-outcome-text">Reduction in support tickets after launch</div>
+        </div>
+        <div class="ws-outcome">
+          <div class="ws-outcome-number">27% → &lt;9%</div>
+          <div class="ws-outcome-text">Fail rate improvement measured by thumbs up/down feedback — support team also reported faster knowledge retrieval and higher-quality answers</div>
+        </div>
+        <div class="ws-outcome">
+          <div class="ws-outcome-number">3</div>
+          <div class="ws-outcome-text">Custom-built RAG chatbots currently in production, replacing the original vendor solution</div>
+        </div>
+        <div class="ws-outcome">
+          <div class="ws-outcome-number">92%</div>
+          <div class="ws-outcome-text">Increase in chatbot usage after launch — nearly double the prior baseline</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ws-closing">
+      Shipping AI-powered documentation tooling isn't just a writing problem or just an engineering problem. It sits at the intersection — and that's exactly where I work.
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

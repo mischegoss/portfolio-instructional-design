@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — Tamar Auber</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #080d1a;
+    color: #fff;
+    font-family: 'Barlow', sans-serif;
+    min-height: 100vh;
+  }
+
+  header {
+    padding: 3rem 4rem 2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  header p {
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #6b9fff;
+    margin-bottom: 0.5rem;
+  }
+
+  header h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    color: #fff;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    padding: 3rem 4rem;
+  }
+
+  @media (max-width: 900px) {
+    .grid { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+    header { padding: 2rem 1.5rem; }
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    background: #0f1628;
+    border: 1px solid rgba(255,255,255,0.07);
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+    cursor: pointer;
+  }
+
+  .card:hover { transform: translateY(-4px); border-color: rgba(107,159,255,0.4); }
+  .card:hover .card-thumb { filter: brightness(1.1); }
+
+  .card-thumb {
+    width: 100%;
+    aspect-ratio: 16/9;
+    transition: filter 0.2s ease;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .thumb-casestudy  { background: linear-gradient(135deg, #0c2a4a 0%, #0d3d6e 50%, #1a5fa8 100%); }
+  .thumb-tutorial   { background: linear-gradient(135deg, #1a0a2e 0%, #2d1060 50%, #4a1d8a 100%); }
+  .thumb-automation { background: linear-gradient(135deg, #0a2a1a 0%, #0d4a2a 50%, #126e3a 100%); }
+  .thumb-lab        { background: linear-gradient(135deg, #2a1a00 0%, #4a3000 50%, #7a5200 100%); }
+  .thumb-video      { background: linear-gradient(135deg, #1a0a0a 0%, #3d1010 50%, #6e1a1a 100%); }
+  .thumb-ragasaurus { background: linear-gradient(135deg, #021a1f 0%, #043040 50%, #07506a 100%); }
+
+  .thumb-svg { width: 64px; height: 64px; opacity: 0.55; }
+
+  .thumb-stat {
+    position: absolute;
+    bottom: 0.75rem;
+    right: 0.75rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 2.5rem;
+    color: rgba(255,255,255,0.1);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .card-body {
+    padding: 1.25rem 1.5rem 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    border-top: 3px solid transparent;
+  }
+
+  /* Accent colors per card */
+  .card:nth-child(1) .card-body { border-top-color: #6b9fff; }
+  .card:nth-child(2) .card-body { border-top-color: #a678ff; }
+  .card:nth-child(3) .card-body { border-top-color: #4ecfa0; }
+  .card:nth-child(4) .card-body { border-top-color: #ffb347; }
+  .card:nth-child(5) .card-body { border-top-color: #ff6b6b; }
+  .card:nth-child(6) .card-body { border-top-color: #4ecfea; }
+
+  .card-tag {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #6b9fff;
+    margin-bottom: 0.5rem;
+  }
+
+  .card:nth-child(2) .card-tag { color: #a678ff; }
+  .card:nth-child(3) .card-tag { color: #4ecfa0; }
+  .card:nth-child(4) .card-tag { color: #ffb347; }
+  .card:nth-child(5) .card-tag { color: #ff6b6b; }
+  .card:nth-child(6) .card-tag { color: #4ecfea; }
+
+  .card-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    line-height: 1.15;
+    color: #fff;
+    flex: 1;
+    margin-bottom: 1.25rem;
+  }
+
+  .card-cta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    transition: color 0.2s ease, gap 0.2s ease;
+  }
+
+  .card:hover .card-cta { color: rgba(255,255,255,0.9); gap: 0.75rem; }
+  .card-cta svg { width: 14px; height: 14px; transition: transform 0.2s ease; }
+  .card:hover .card-cta svg { transform: translateX(3px); }
+
+  .card.featured { grid-column: span 2; }
+  .card.featured .card-thumb { aspect-ratio: 2/1; }
+  .card.featured .card-title { font-size: 1.7rem; }
+
+  .badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    margin-bottom: 0.6rem;
+    font-weight: 600;
+  }
+
+  .badge-blue  { background: #6b9fff22; border: 1px solid #6b9fff44; color: #6b9fff; }
+  .badge-teal  { background: #4ecfea22; border: 1px solid #4ecfea44; color: #4ecfea; }
+</style>
+</head>
+<body>
+
+<header>
+  <p>Instructional Design &amp; Technical Writing Portfolio</p>
+  <h1>Tamar Auber</h1>
+</header>
+
+<div class="grid">
+
+  <!-- 1. Case Study -->
+  <a class="card" href="casestudy.html">
+    <div class="card-thumb thumb-casestudy">
+      <svg class="thumb-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="8" y="12" width="32" height="24" rx="4" stroke="white" stroke-width="2"/>
+        <path d="M14 36 L10 44 L22 38" stroke="white" stroke-width="2" stroke-linejoin="round"/>
+        <rect x="28" y="24" width="28" height="20" rx="4" stroke="white" stroke-width="2"/>
+        <circle cx="38" cy="34" r="2" fill="white"/>
+        <circle cx="45" cy="34" r="2" fill="white"/>
+      </svg>
+    </div>
+    <div class="card-body">
+      <div class="card-tag">Case Study · AI / RAG Architecture</div>
+      <div class="card-title">Building a documentation chatbot that actually works</div>
+      <div class="card-cta">
+        Read Case Study
+        <svg viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+  </a>
+
+  <!-- 2. Integration Tutorial -->
+  <a class="card" href="tutorial.html">
+    <div class="card-thumb thumb-tutorial">
+      <svg class="thumb-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="16" cy="32" r="8" stroke="white" stroke-width="2"/>
+        <circle cx="48" cy="32" r="8" stroke="white" stroke-width="2"/>
+        <path d="M24 32h16" stroke="white" stroke-width="2" stroke-dasharray="4 3"/>
+        <path d="M35 28l5 4-5 4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="card-body">
+      <div class="card-tag">Playbook · Systems Integration</div>
+      <div class="card-title">The integration map</div>
+      <div class="card-cta">
+        View Tutorial
+        <svg viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+  </a>
+
+  <!-- 3. Automation Module -->
+  <a class="card" href="automation.html">
+    <div class="card-thumb thumb-automation">
+      <svg class="thumb-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M32 8 L56 20 L56 44 L32 56 L8 44 L8 20 Z" stroke="white" stroke-width="2"/>
+        <path d="M32 8 L32 56M8 20 L56 20M8 44 L56 44" stroke="white" stroke-width="1" stroke-dasharray="3 3" opacity="0.5"/>
+        <circle cx="32" cy="32" r="6" stroke="white" stroke-width="2"/>
+      </svg>
+    </div>
+    <div class="card-body">
+      <div class="card-tag">eLearning Module · Change Enablement</div>
+      <div class="card-title">Identify automation opportunities</div>
+      <div class="card-cta">
+        View Module
+        <svg viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+  </a>
+
+  <!-- 4. Google Lab -->
+  <a class="card" href="googlelab.html">
+    <div class="card-thumb thumb-lab">
+      <svg class="thumb-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="10" y="14" width="44" height="36" rx="3" stroke="white" stroke-width="2"/>
+        <path d="M10 22h44" stroke="white" stroke-width="1.5"/>
+        <rect x="17" y="30" width="12" height="12" rx="1" stroke="white" stroke-width="1.5"/>
+        <path d="M35 30h12M35 36h8M35 42h10" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="card-body">
+      <div class="card-tag">Hands-On Lab · Google Cloud</div>
+      <div class="card-title">Model dimensions and measures using LookML</div>
+      <div class="card-cta">
+        View Lab
+        <svg viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+  </a>
+
+  <!-- 5. Video Script -->
+  <a class="card" href="googlevideo.html">
+    <div class="card-thumb thumb-video">
+      <svg class="thumb-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="8" y="16" width="36" height="28" rx="3" stroke="white" stroke-width="2"/>
+        <path d="M44 24l12-6v24l-12-6V24Z" stroke="white" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M20 26l10 6-10 6V26Z" fill="white" opacity="0.5"/>
+      </svg>
+    </div>
+    <div class="card-body">
+      <div class="card-tag">Video Script · Technical Explainer</div>
+      <div class="card-title">The benefits of using version control</div>
+      <div class="card-cta">
+        View Script
+        <svg viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+  </a>
+
+  <!-- 6. Ragasaurus -->
+  <a class="card" href="ragasaurus.html">
+    <div class="card-thumb thumb-ragasaurus">
+      <svg class="thumb-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="32" cy="20" r="6" stroke="white" stroke-width="2"/>
+        <circle cx="14" cy="44" r="5" stroke="white" stroke-width="2"/>
+        <circle cx="32" cy="44" r="5" stroke="white" stroke-width="2"/>
+        <circle cx="50" cy="44" r="5" stroke="white" stroke-width="2"/>
+        <path d="M32 26v12M32 26l-14 12M32 26l18 12" stroke="white" stroke-width="1.5" stroke-dasharray="3 2"/>
+      </svg>
+    </div>
+    <div class="card-body">
+      <div class="card-tag">Agentic AI · RAG · KaibanJS</div>
+      <div class="card-title">Ragasaurus — AI-powered documentation enhancement plugin</div>
+      <div class="card-cta">
+        View on Devpost
+        <svg viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+  </a>
+
+</div>
+
+</body>
+</html>
