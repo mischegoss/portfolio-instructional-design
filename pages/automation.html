@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Automation Enablement Module — Tamar Auber</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #080d1a;
+    color: #fff;
+    font-family: 'Barlow', sans-serif;
+    min-height: 100vh;
+  }
+
+  nav {
+    padding: 1.5rem 4rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  nav a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(255,255,255,0.45);
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: color 0.2s;
+  }
+
+  nav a:hover { color: #4ecfa0; }
+  nav a svg { width: 13px; height: 13px; transition: transform 0.2s; }
+  nav a:hover svg { transform: translateX(-3px); }
+  nav .divider { color: rgba(255,255,255,0.15); font-size: 0.7rem; }
+  nav .current { color: rgba(255,255,255,0.6); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 400; }
+
+  .hero { padding: 3rem 4rem 2.5rem; max-width: 960px; }
+  .hero-tag { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: #4ecfa0; margin-bottom: 0.75rem; font-weight: 600; }
+  .hero h1 { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 800; text-transform: uppercase; letter-spacing: 0.03em; line-height: 1.05; margin-bottom: 1.5rem; }
+  .hero h1 span { color: #4ecfa0; }
+
+  .meta-row { display: flex; flex-wrap: wrap; gap: 2rem; padding: 1.25rem 0; border-top: 1px solid rgba(255,255,255,0.08); border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .meta-item { display: flex; flex-direction: column; gap: 0.2rem; }
+  .meta-label { font-size: 0.65rem; letter-spacing: 0.13em; text-transform: uppercase; color: rgba(255,255,255,0.35); font-weight: 600; }
+  .meta-value { font-size: 0.88rem; color: rgba(255,255,255,0.8); font-weight: 500; }
+
+  .white-section { background: #fff; padding: 3.5rem 0 5rem; }
+  .white-inner { max-width: 720px; margin: 0 auto; padding: 0 2rem; }
+
+  .ws-heading { font-size: 0.67rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #4ecfa0; margin-bottom: 0.85rem; margin-top: 1.75rem; }
+  .ws-heading:first-child { margin-top: 0; }
+
+  .white-section p { font-size: 0.97rem; line-height: 1.78; color: #333; margin-bottom: 0.9rem; }
+  .white-section p:last-child { margin-bottom: 0; }
+  .white-section strong { color: #111; font-weight: 600; }
+
+  .decision-list { list-style: none; margin: 0.5rem 0 1rem; display: flex; flex-direction: column; gap: 0.75rem; }
+  .decision-list li { font-size: 0.95rem; color: #333; line-height: 1.65; padding-left: 1.1rem; position: relative; }
+  .decision-list li::before { content: '–'; position: absolute; left: 0; color: #4ecfa0; font-weight: 700; }
+  .decision-list li strong { color: #111; font-weight: 600; }
+
+  .launch-row {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid #ebebeb;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .launch-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: #4ecfa0;
+    color: #042e1e;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.85rem 1.75rem;
+    text-decoration: none;
+    transition: background 0.2s, gap 0.2s;
+  }
+
+  .launch-btn:hover { background: #6eddb5; gap: 0.85rem; }
+  .launch-btn svg { width: 13px; height: 13px; }
+
+  .launch-note { font-size: 0.78rem; color: #bbb; letter-spacing: 0.03em; }
+
+  @media (max-width: 768px) {
+    nav, .hero { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .white-inner { padding: 0 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="portfolio-cards.html">
+    <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M13 7H1M6 2L1 7l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Portfolio
+  </a>
+  <span class="divider">/</span>
+  <span class="current">Automation Enablement Module</span>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag">eLearning Module · Change Enablement · Resolve Systems</div>
+  <h1>Identify Automation<br><span>Opportunities</span></h1>
+  <div class="meta-row">
+    <div class="meta-item">
+      <span class="meta-label">Format</span>
+      <span class="meta-value">Interactive eLearning Module</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Audience</span>
+      <span class="meta-value">IT Teams · Business Unit Champions</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Tools</span>
+      <span class="meta-value">Custom LMS · Embedded AI Assistant</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Role</span>
+      <span class="meta-value">Instructional Designer · Developer</span>
+    </div>
+  </div>
+</div>
+
+<div class="white-section">
+  <div class="white-inner">
+
+    <div class="ws-heading">About This Module</div>
+    <p>This module is the entry point to Resolve's automation learning program, designed to help IT teams move from "we should automate something" to a concrete first candidate with defined success criteria, in a single session.</p>
+    <p>The central challenge in automation adoption isn't technical. Most teams understand what automation can do. The block is knowing <strong>where to start</strong> and building enough internal confidence to move forward without waiting for a perfect use case. This module is built around that problem.</p>
+
+    <div class="ws-heading">Design Decisions</div>
+    <ul class="decision-list">
+      <li><strong>The Automatable persona</strong> exists because abstract change management advice doesn't stick. A named organization moving through the same journey as the learner creates emotional continuity across the program. Learners follow Automatable's progress rather than consuming isolated modules.</li>
+      <li><strong>The start-small framework</strong> (Choose → Define Success → Measure → Celebrate) is deliberately low-stakes. It's not a full automation methodology; it's a wedge. The goal is a single successful automation that builds internal credibility for the broader program, giving learners a replicable model they can apply immediately.</li>
+      <li><strong>Measurable outcomes are baked in from step one</strong> because adoption fails when teams can't demonstrate ROI. Defining success criteria before automating is an ID decision, not just a business one. It gives learners a concrete completion condition for the activity and a ready-made framework for communicating impact upward.</li>
+      <li><strong>The embedded assessment produces a downloadable artifact.</strong> The interactive form generates a completed automation candidate brief that learners can export as a PDF to share with managers or other decision-makers. The learning transfers directly into a real workflow conversation rather than staying inside the module.</li>
+      <li><strong>RANI, the embedded AI assistant</strong>, is positioned inside the module itself with pre-written prompt suggestions. This models AI-assisted workflow adoption in real time. Learners aren't just reading about AI tools; they're using one to complete the learning activity.</li>
+    </ul>
+
+    <div class="launch-row">
+      <a class="launch-btn" href="https://resolve-io.github.io/automation-identify/#/" target="_blank">
+        Launch Live Module
+        <svg viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 12L12 1M12 1H5M12 1V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <span class="launch-note">Opens in new tab</span>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

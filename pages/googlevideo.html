@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Video Script — Tamar Auber</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background: #080d1a;
+        color: #fff;
+        font-family: 'Barlow', sans-serif;
+        min-height: 100vh;
+      }
+
+      nav {
+        padding: 1.5rem 4rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      nav a {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: rgba(255, 255, 255, 0.45);
+        text-decoration: none;
+        font-size: 0.78rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-weight: 600;
+        transition: color 0.2s;
+      }
+
+      nav a:hover {
+        color: #ff6b6b;
+      }
+      nav a svg {
+        width: 13px;
+        height: 13px;
+        transition: transform 0.2s;
+      }
+      nav a:hover svg {
+        transform: translateX(-3px);
+      }
+      nav .divider {
+        color: rgba(255, 255, 255, 0.15);
+        font-size: 0.7rem;
+      }
+      nav .current {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-weight: 400;
+      }
+
+      .hero {
+        padding: 3rem 4rem 2.5rem;
+        max-width: 960px;
+      }
+      .hero-tag {
+        font-size: 0.72rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: #ff6b6b;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+      }
+      .hero h1 {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: clamp(2rem, 4vw, 3.2rem);
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        line-height: 1.05;
+        margin-bottom: 1.5rem;
+      }
+      .hero h1 span {
+        color: #ff6b6b;
+      }
+
+      .meta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        padding: 1.25rem 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .meta-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+      }
+      .meta-label {
+        font-size: 0.65rem;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.35);
+        font-weight: 600;
+      }
+      .meta-value {
+        font-size: 0.88rem;
+        color: rgba(255, 255, 255, 0.8);
+        font-weight: 500;
+      }
+
+      /* Framing */
+      .framing {
+        max-width: 960px;
+        margin: 0 auto 3rem;
+        padding: 3rem 4rem 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+      }
+
+      .framing-heading {
+        font-size: 0.67rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #ff6b6b;
+        margin-bottom: 0.75rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid rgba(255, 107, 107, 0.2);
+      }
+
+      .framing p {
+        font-size: 0.95rem;
+        line-height: 1.75;
+        color: rgba(255, 255, 255, 0.65);
+      }
+
+      /* White section */
+      .white-section {
+        background: #fff;
+        padding: 3.5rem 0 5rem;
+      }
+      .white-inner {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      .ws-heading {
+        font-size: 0.67rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #ff6b6b;
+        margin-bottom: 0.85rem;
+        margin-top: 1.75rem;
+      }
+      .ws-heading:first-child {
+        margin-top: 0;
+      }
+
+      .white-section p {
+        font-size: 0.97rem;
+        line-height: 1.78;
+        color: #333;
+        margin-bottom: 0.9rem;
+      }
+      .white-section p:last-child {
+        margin-bottom: 0;
+      }
+      .white-section strong {
+        color: #111;
+        font-weight: 600;
+      }
+
+      .screenshot-block {
+        display: flex;
+        flex-direction: column;
+        margin-top: 1.5rem;
+      }
+
+      .screenshot-caption {
+        font-size: 0.67rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: #ff6b6b;
+        padding: 0.6rem 0.85rem;
+        background: #0f1628;
+        border-top: 2px solid #ff6b6b;
+      }
+
+      .screenshot-block img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border: 1px solid #e8e8e8;
+        border-top: none;
+      }
+
+      .screenshot-note {
+        font-size: 0.78rem;
+        color: #aaa;
+        line-height: 1.5;
+        padding: 0.6rem 0.85rem;
+        background: #fafafa;
+        border: 1px solid #e8e8e8;
+        border-top: none;
+      }
+
+      .screenshots-two-up {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+      }
+
+      .script-block {
+        margin-top: 2rem;
+        background: #fafafa;
+        border: 1px solid #e8e8e8;
+        border-top: 2px solid #ff6b6b;
+      }
+
+      .script-header {
+        padding: 0.75rem 1.25rem;
+        border-bottom: 1px solid #e8e8e8;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .script-header-label {
+        font-size: 0.67rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: #ff6b6b;
+      }
+      .script-meta {
+        font-size: 0.75rem;
+        color: #aaa;
+        letter-spacing: 0.03em;
+      }
+
+      .script-body {
+        padding: 1.5rem 1.25rem;
+        font-size: 0.97rem;
+        line-height: 1.85;
+        color: #333;
+      }
+
+      .script-body p {
+        margin-bottom: 1.1rem;
+        font-size: 0.97rem;
+        line-height: 1.85;
+        color: #333;
+      }
+      .script-body p:last-child {
+        margin-bottom: 0;
+      }
+
+      .script-scene {
+        font-size: 0.63rem;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: #ff6b6b;
+        display: block;
+        margin-bottom: 0.5rem;
+        margin-top: 1.5rem;
+      }
+
+      .script-scene:first-child {
+        margin-top: 0;
+      }
+
+      @media (max-width: 768px) {
+        nav,
+        .hero {
+          padding-left: 1.5rem;
+          padding-right: 1.5rem;
+        }
+        .white-inner {
+          padding: 0 1.5rem;
+        }
+        .framing {
+          grid-template-columns: 1fr;
+          padding: 2rem 1.5rem 0;
+          gap: 2rem;
+        }
+        .screenshots-two-up {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="index.html">
+        <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M13 7H1M6 2L1 7l5 5"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        Portfolio
+      </a>
+      <span class="divider">/</span>
+      <span class="current">Video Script</span>
+    </nav>
+
+    <div class="hero">
+      <div class="hero-tag">
+        Video Script · Technical Explainer · Google Career Certificates
+      </div>
+      <h1>The Benefits of<br /><span>Using Version Control</span></h1>
+      <div class="meta-row">
+        <div class="meta-item">
+          <span class="meta-label">Format</span>
+          <span class="meta-value">Animated explainer video · 3 minutes</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Program</span>
+          <span class="meta-value"
+            >Google Cloud Data Analytics Certificate</span
+          >
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Module</span>
+          <span class="meta-value">Module 5 · Getting Started with IDEs</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Role</span>
+          <span class="meta-value"
+            >Technical Content Writer (via Synergis)</span
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="framing">
+      <div class="framing-block">
+        <div class="framing-heading">My Role</div>
+        <p>
+          I wrote this script as a contractor via Synergis for Google Career
+          Certificates, producing the narration, scenario structure, and concept
+          progression for a 3-minute animated explainer video.
+        </p>
+      </div>
+      <div class="framing-block">
+        <div class="framing-heading">The Writing Challenge</div>
+        <p>
+          The core challenge was making a developer workflow concept land for a
+          non-developer audience without oversimplifying it. The Min and Carl
+          scenario is a deliberate ID choice: give learners a clear scenario
+          before the technical definition is explained.
+        </p>
+      </div>
+    </div>
+
+    <div class="white-section">
+      <div class="white-inner">
+        <div class="ws-heading">About This Script</div>
+        <p>
+          This script was written for a 3-minute animated explainer video in
+          Module 5 of the
+          <strong>Google Cloud Data Analytics Certificate</strong>, delivered
+          through Coursera and Google Skills. The video introduces version
+          control to entry-level data analysts who understand dashboards and
+          data tools but may have no prior experience with Git or collaborative
+          development workflows.
+        </p>
+        <p>
+          The script follows a problem-solution-example structure. It opens with
+          a concrete problem (bugs and overwritten work on a shared dashboard),
+          introduces version control as the solution, then uses the Min and Carl
+          scenario to show how branching works in a real team context, grounding
+          an abstract concept in a relatable, memorable use case.
+        </p>
+
+        <div class="screenshot-block" style="margin-top: 1.5rem">
+          <div class="screenshot-caption">
+            Course Context — Coursera Module 5
+          </div>
+          <img
+            src="../images/script-placement.png"
+            alt="Coursera Module 5 outline showing The benefits of using version control as a completed 3-minute video in the Getting Started with IDEs section"
+          />
+          <div class="screenshot-note">
+            The video sits in the "Getting started with IDEs" section of Module
+            5, alongside the Elements of LookML reading and the hands-on lab.
+          </div>
+        </div>
+
+        <div class="ws-heading">Script</div>
+
+        <div class="script-block">
+          <div class="script-header">
+            <span class="script-header-label"
+              >The Benefits of Using Version Control</span
+            >
+            <span class="script-meta"
+              >Video · 3 min · Google Cloud Data Analytics Certificate · Module
+              5</span
+            >
+          </div>
+          <div class="script-body">
+            <span class="script-scene">The Problem</span>
+            <p>
+              Using a data visualization user interface or UI can be a quick and
+              easy way to make changes directly to a deployed dashboard, but
+              it's not always the easiest way to manage dashboards. When you
+              make changes to the deployed dashboard, it can be difficult to
+              track down any bugs that may be introduced. Additionally, if two
+              or more developers are making changes to the same dashboard at the
+              same time, they may accidentally overwrite each other's work.
+            </p>
+
+            <span class="script-scene">The Solution</span>
+            <p>
+              To prevent errors from reaching the deployed dashboard and to make
+              it easier to collaborate, some development teams use a process
+              called version control. Version control is a process to track
+              changes to your code, data, or other files over time. Using
+              version control can be a great way to manage changes for a complex
+              visualization project.
+            </p>
+
+            <span class="script-scene">Key Concepts</span>
+            <p>
+              To start, let's break down the parts of a version control project.
+              First, a repository is a central location for storing and managing
+              the files and history of a project. When developers use version
+              control to store a visualization project, creating a repository is
+              usually the first step. This can be done locally, but repositories
+              are often hosted on a remote server. This repository becomes the
+              central location, or single source of truth, for all the changes
+              developers make to the project.
+            </p>
+            <p>
+              In a repository, developers make all changes to a project in
+              branches. A branch is a working copy of a repository. Like a tree
+              branch that splits off the trunk, a branch in version control
+              splits off the main project code. This allows the branch to grow
+              in its own way and form an independent development path. When a
+              developer creates a new branch, it's a duplicate of the main
+              project code. The developer can then use this copy to make changes
+              to the code, but since the branch is independent, any changes the
+              developer makes to the copy do not impact the main project or
+              other branches. Instead, the changes are local to that branch.
+            </p>
+            <p>
+              This makes version control a really powerful tool when developers
+              need to collaborate on large-scale projects and want to review
+              changes before they go live.
+            </p>
+
+            <span class="script-scene">Min and Carl — A Working Example</span>
+            <p>
+              Let's explore an example. Min and Carl are part of a team building
+              a complex dashboard. They've each been assigned an important
+              feature to work on. To start, they each create their own branch in
+              the shared repository. This creates a separate copy of the code
+              that they can work on independently. This way, they can work on
+              their assigned features without impacting anyone else's work.
+            </p>
+            <p>
+              They can also use their branches to collaborate. So let's say Carl
+              gets stuck and needs help deciding how to implement a feature.
+              Carl shares a branch with Min, who can then comment on Carl's code
+              and provide feedback. Min can help Carl get unblocked and move
+              forward.
+            </p>
+            <p>
+              Min and Carl can also share their branches with other team members
+              to test the code and spot potential bugs or errors before the code
+              goes live. This is a great way to collaborate and ensure the code
+              is high quality.
+            </p>
+            <p>
+              When the work in a branch is complete and tested, the changes Min
+              and Carl made can then be merged back into the main project code
+              and deployed to the live project. Using branching allows teams to
+              independently work on features, collaborate, and test their work
+              before the dashboard goes live.
+            </p>
+
+            <span class="script-scene">Wrap-Up</span>
+            <p>
+              Developing complex visualization projects like dashboards can be a
+              lot of work. And if you're working on a team, it can be even more
+              challenging to keep track of changes and make sure everyone is on
+              the same page. But with version control, you can track changes
+              over time, collaborate with others, and keep your projects
+              organized.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
