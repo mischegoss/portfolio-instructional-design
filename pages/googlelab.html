@@ -1,230 +1,554 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfolio — Tamar Auber</title>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Google Lab — Tamar Auber</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-  body {
-    background: #080d1a;
-    color: #fff;
-    font-family: 'Barlow', sans-serif;
-    min-height: 100vh;
-  }
+      body {
+        background: #080d1a;
+        color: #fff;
+        font-family: 'Barlow', sans-serif;
+        min-height: 100vh;
+      }
 
-  header {
-    padding: 3rem 4rem 2rem;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-  }
+      nav {
+        padding: 1.5rem 4rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
 
-  header p {
-    font-size: 0.8rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: #6b9fff;
-    margin-bottom: 0.5rem;
-  }
+      nav a {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: rgba(255, 255, 255, 0.45);
+        text-decoration: none;
+        font-size: 0.78rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-weight: 600;
+        transition: color 0.2s;
+      }
 
-  header h1 {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: clamp(2rem, 4vw, 3.2rem);
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    line-height: 1;
-    color: #fff;
-  }
+      nav a:hover {
+        color: #ffb347;
+      }
+      nav a svg {
+        width: 13px;
+        height: 13px;
+        transition: transform 0.2s;
+      }
+      nav a:hover svg {
+        transform: translateX(-3px);
+      }
+      nav .divider {
+        color: rgba(255, 255, 255, 0.15);
+        font-size: 0.7rem;
+      }
+      nav .current {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-weight: 400;
+      }
 
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-    padding: 3rem 4rem;
-  }
+      .hero {
+        padding: 3rem 4rem 2.5rem;
+        max-width: 960px;
+      }
+      .hero-tag {
+        font-size: 0.72rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: #ffb347;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+      }
+      .hero h1 {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: clamp(2rem, 4vw, 3.2rem);
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        line-height: 1.05;
+        margin-bottom: 1.5rem;
+      }
+      .hero h1 span {
+        color: #ffb347;
+      }
 
-  @media (max-width: 768px) {
-    .grid { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
-    header { padding: 2rem 1.5rem; }
-  }
+      .meta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        padding: 1.25rem 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .meta-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+      }
+      .meta-label {
+        font-size: 0.65rem;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.35);
+        font-weight: 600;
+      }
+      .meta-value {
+        font-size: 0.88rem;
+        color: rgba(255, 255, 255, 0.8);
+        font-weight: 500;
+      }
 
-  .card {
-    display: flex;
-    flex-direction: column;
-    background: #0f1628;
-    border: 1px solid rgba(255,255,255,0.07);
-    text-decoration: none;
-    color: inherit;
-    transition: transform 0.2s ease, border-color 0.2s ease;
-    cursor: pointer;
-  }
+      .framing {
+        max-width: 960px;
+        margin: 0 auto 3rem;
+        padding: 3rem 4rem 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+      }
 
-  .card:hover { transform: translateY(-4px); }
-  .card:hover .card-thumb { filter: brightness(1.1); }
+      .framing-heading {
+        font-size: 0.67rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #ffb347;
+        margin-bottom: 0.75rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid rgba(255, 179, 71, 0.2);
+      }
 
-  .card-thumb {
-    width: 100%;
-    aspect-ratio: 16/9;
-    transition: filter 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
+      .framing p {
+        font-size: 0.95rem;
+        line-height: 1.75;
+        color: rgba(255, 255, 255, 0.65);
+      }
 
-  .thumb-casestudy  { background: linear-gradient(135deg, #0c2a4a 0%, #0d3d6e 50%, #1a5fa8 100%); }
-  .thumb-automation { background: linear-gradient(135deg, #0a2a1a 0%, #0d4a2a 50%, #126e3a 100%); }
-  .thumb-lab        { background: linear-gradient(135deg, #2a1a00 0%, #4a3000 50%, #7a5200 100%); }
-  .thumb-video      { background: linear-gradient(135deg, #1a0a0a 0%, #3d1010 50%, #6e1a1a 100%); }
+      .white-section {
+        background: #fff;
+        padding: 3.5rem 0 5rem;
+      }
+      .white-inner {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
 
-  .thumb-svg { width: 64px; height: 64px; opacity: 0.55; }
+      .ws-heading {
+        font-size: 0.67rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #ffb347;
+        margin-bottom: 0.85rem;
+        margin-top: 1.75rem;
+      }
+      .ws-heading:first-child {
+        margin-top: 0;
+      }
 
-  .card-body {
-    padding: 1.25rem 1.5rem 1.5rem;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    border-top: 3px solid transparent;
-  }
+      .white-section p {
+        font-size: 0.97rem;
+        line-height: 1.78;
+        color: #333;
+        margin-bottom: 0.9rem;
+      }
+      .white-section p:last-child {
+        margin-bottom: 0;
+      }
+      .white-section strong {
+        color: #111;
+        font-weight: 600;
+      }
 
-  .card:nth-child(1) .card-body { border-top-color: #6b9fff; }
-  .card:nth-child(2) .card-body { border-top-color: #4ecfa0; }
-  .card:nth-child(3) .card-body { border-top-color: #ffb347; }
-  .card:nth-child(4) .card-body { border-top-color: #ff6b6b; }
+      .screenshots {
+        margin-top: 2.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+      .screenshot-block {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
 
-  .card-tag {
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
-    color: #6b9fff;
-  }
+      .screenshot-caption {
+        font-size: 0.67rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: #ffb347;
+        padding: 0.6rem 0.85rem;
+        background: #0f1628;
+        border-top: 2px solid #ffb347;
+      }
 
-  .card:nth-child(2) .card-tag { color: #4ecfa0; }
-  .card:nth-child(3) .card-tag { color: #ffb347; }
-  .card:nth-child(4) .card-tag { color: #ff6b6b; }
+      .screenshot-block img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border: 1px solid #e8e8e8;
+        border-top: none;
+      }
 
-  .card-title {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 1.35rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-    line-height: 1.15;
-    color: #fff;
-    flex: 1;
-    margin-bottom: 1.25rem;
-  }
+      .screenshot-note {
+        font-size: 0.78rem;
+        color: #aaa;
+        line-height: 1.5;
+        padding: 0.6rem 0.85rem;
+        background: #fafafa;
+        border: 1px solid #e8e8e8;
+        border-top: none;
+      }
 
-  .card-cta {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.5);
-    transition: color 0.2s ease, gap 0.2s ease;
-  }
+      .screenshots-two-up {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+      }
 
-  .card:hover .card-cta { color: rgba(255,255,255,0.9); gap: 0.75rem; }
-  .card-cta svg { width: 14px; height: 14px; transition: transform 0.2s ease; }
-  .card:hover .card-cta svg { transform: translateX(3px); }
-</style>
-</head>
-<body>
+      .launch-row {
+        margin-top: 2.5rem;
+        padding-top: 2rem;
+        border-top: 1px solid #ebebeb;
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+      }
 
-<header>
-  <p>Instructional Design &amp; Technical Writing Portfolio</p>
-  <h1>Tamar Auber</h1>
-</header>
+      .launch-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        background: #ffb347;
+        color: #2a1800;
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: 0.9rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 0.85rem 1.75rem;
+        text-decoration: none;
+        transition:
+          background 0.2s,
+          gap 0.2s;
+      }
 
-<div class="grid">
+      .launch-btn:hover {
+        background: #ffc96e;
+        gap: 0.85rem;
+      }
+      .launch-btn svg {
+        width: 13px;
+        height: 13px;
+      }
 
-  <!-- 1. Case Study -->
-  <a class="card" href="casestudy.html">
-    <div class="card-thumb thumb-casestudy">
-      <svg class="thumb-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="8" y="12" width="32" height="24" rx="4" stroke="white" stroke-width="2"/>
-        <path d="M14 36 L10 44 L22 38" stroke="white" stroke-width="2" stroke-linejoin="round"/>
-        <rect x="28" y="24" width="28" height="20" rx="4" stroke="white" stroke-width="2"/>
-        <circle cx="38" cy="34" r="2" fill="white"/>
-        <circle cx="45" cy="34" r="2" fill="white"/>
-      </svg>
-    </div>
-    <div class="card-body">
-      <div class="card-tag">Case Study · AI / RAG Architecture</div>
-      <div class="card-title">Building a documentation chatbot that actually works</div>
-      <div class="card-cta">
-        Read Case Study
-        <svg viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      @media (max-width: 768px) {
+        nav,
+        .hero {
+          padding-left: 1.5rem;
+          padding-right: 1.5rem;
+        }
+        .white-inner {
+          padding: 0 1.5rem;
+        }
+        .framing {
+          grid-template-columns: 1fr;
+          padding: 2rem 1.5rem 0;
+          gap: 2rem;
+        }
+        .screenshots-two-up {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="../index.html">
+        <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M13 7H1M6 2L1 7l5 5"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        Portfolio
+      </a>
+      <span class="divider">/</span>
+      <span class="current">Google Cloud Lab</span>
+    </nav>
+
+    <div class="hero">
+      <div class="hero-tag">
+        Hands-On Lab · Google Cloud · Google Career Certificates
+      </div>
+      <h1>Model Dimensions and<br /><span>Measures Using LookML</span></h1>
+      <div class="meta-row">
+        <div class="meta-item">
+          <span class="meta-label">Program</span>
+          <span class="meta-value"
+            >Google Cloud Data Analytics Certificate</span
+          >
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Platform</span>
+          <span class="meta-value">Coursera · Google Skills</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Format</span>
+          <span class="meta-value">Timed, graded, hands-on lab</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Role</span>
+          <span class="meta-value"
+            >Technical Content Writer (via Synergis)</span
+          >
+        </div>
       </div>
     </div>
-  </a>
 
-  <!-- 2. Automation Module -->
-  <a class="card" href="automation.html">
-    <div class="card-thumb thumb-automation">
-      <svg class="thumb-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M32 8 L56 20 L56 44 L32 56 L8 44 L8 20 Z" stroke="white" stroke-width="2"/>
-        <path d="M32 8 L32 56M8 20 L56 20M8 44 L56 44" stroke="white" stroke-width="1" stroke-dasharray="3 3" opacity="0.5"/>
-        <circle cx="32" cy="32" r="6" stroke="white" stroke-width="2"/>
-      </svg>
-    </div>
-    <div class="card-body">
-      <div class="card-tag">eLearning Module · Change Enablement</div>
-      <div class="card-title">Identify automation opportunities</div>
-      <div class="card-cta">
-        View Module
-        <svg viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <div class="framing">
+      <div class="framing-block">
+        <div class="framing-heading">My Role</div>
+        <p>
+          I wrote the task instructions, scaffolded steps, and grading
+          checkpoints that run in a live testing environment.
+        </p>
+      </div>
+      <div class="framing-block">
+        <div class="framing-heading">The Writing Challenge</div>
+        <p>
+          The core challenge was translating LookML, a domain-specific modeling
+          language, into steps precise enough to execute in a live IDE for users
+          at various levels.
+        </p>
       </div>
     </div>
-  </a>
 
-  <!-- 3. Google Lab -->
-  <a class="card" href="googlelab.html">
-    <div class="card-thumb thumb-lab">
-      <svg class="thumb-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="10" y="14" width="44" height="36" rx="3" stroke="white" stroke-width="2"/>
-        <path d="M10 22h44" stroke="white" stroke-width="1.5"/>
-        <rect x="17" y="30" width="12" height="12" rx="1" stroke="white" stroke-width="1.5"/>
-        <path d="M35 30h12M35 36h8M35 42h10" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-      </svg>
-    </div>
-    <div class="card-body">
-      <div class="card-tag">Hands-On Lab · Google Cloud</div>
-      <div class="card-title">Model dimensions and measures using LookML</div>
-      <div class="card-cta">
-        View Lab
-        <svg viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <div class="white-section">
+      <div class="white-inner">
+        <div class="ws-heading">About This Lab</div>
+        <p>
+          This hands-on lab is part of the
+          <strong>Google Cloud Data Analytics Certificate</strong>, a program
+          offered through Coursera and Google Skills.
+        </p>
+        <p>
+          The lab asks learners to interact directly with the Looker IDE, the
+          same environment they will use to apply the skills on the job. Working
+          against a 90-minute timer with a scored 100-point assessment, learners
+          complete key LookML tasks.
+        </p>
+
+        <div class="screenshots">
+          <div class="screenshot-block">
+            <div class="screenshot-caption">
+              Course Context — Coursera Module Outline
+            </div>
+            <img
+              src="../images/lab-placement.png"
+              alt="Coursera module outline showing the lab as a graded assessment in Data modeling in the developer environment"
+            />
+            <div class="screenshot-note">
+              The lab appears as a graded item within the "Data modeling in the
+              developer environment" module.
+            </div>
+          </div>
+
+          <div class="ws-heading" style="margin-top: 0">
+            Lab Tasks — Google Skills Environment
+          </div>
+          <div class="screenshot-block">
+            <div class="screenshot-caption">Task 2 — Create a data model</div>
+            <img
+              src="../images/task2.png"
+              alt="Task 2: Create a data model showing step-by-step instructions in the Google Skills timed lab interface"
+            />
+          </div>
+          <div class="screenshot-block">
+            <div class="screenshot-caption">
+              Task 4 — Define measures and dimensions
+            </div>
+            <img
+              src="../images/task4.png"
+              alt="Task 4: Define measures and dimensions showing LookML code snippet in the Google Skills timed lab interface"
+            />
+          </div>
+          <div class="screenshot-note">
+            The lab runs in a timed 90-minute sandbox connected to a live Google
+            Cloud console. Each task is scored automatically and the score
+            indicator in the top right updates as learners complete each step
+            correctly.
+          </div>
+        </div>
+
+        <div class="launch-row">
+          <button
+            class="launch-btn"
+            onclick="
+              document.getElementById('access-modal').style.display = 'flex'
+            "
+          >
+            View on Coursera
+            <svg
+              viewBox="0 0 13 13"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1 12L12 1M12 1H5M12 1V8"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
-  </a>
 
-  <!-- 4. Video Script -->
-  <a class="card" href="googlevideo.html">
-    <div class="card-thumb thumb-video">
-      <svg class="thumb-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="8" y="16" width="36" height="28" rx="3" stroke="white" stroke-width="2"/>
-        <path d="M44 24l12-6v24l-12-6V24Z" stroke="white" stroke-width="2" stroke-linejoin="round"/>
-        <path d="M20 26l10 6-10 6V26Z" fill="white" opacity="0.5"/>
-      </svg>
-    </div>
-    <div class="card-body">
-      <div class="card-tag">Video Script · Technical Explainer</div>
-      <div class="card-title">The benefits of using version control</div>
-      <div class="card-cta">
-        View Script
-        <svg viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <!-- Modal -->
+    <div
+      id="access-modal"
+      style="
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+      "
+    >
+      <div
+        style="
+          background: #fff;
+          max-width: 480px;
+          width: 100%;
+          padding: 2rem;
+          position: relative;
+        "
+      >
+        <p
+          style="
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: #ffb347;
+            margin-bottom: 0.75rem;
+          "
+        >
+          Access Note
+        </p>
+        <p
+          style="
+            font-size: 1rem;
+            color: #0f1628;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 1rem;
+            font-family: 'Barlow Condensed', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+          "
+        >
+          Enrollment Required
+        </p>
+        <p
+          style="
+            font-size: 0.93rem;
+            color: #444;
+            line-height: 1.65;
+            margin-bottom: 1.75rem;
+          "
+        >
+          Enrollment in the Google Cloud Data Analytics Certificate is required
+          to access the full lab.
+        </p>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap">
+          <a
+            href="https://www.coursera.org/learn/the-power-of-storytelling-how-to-visualize-data-in-the-cloud/home/module/5"
+            target="_blank"
+            onclick="
+              document.getElementById('access-modal').style.display = 'none'
+            "
+            style="
+              display: inline-flex;
+              align-items: center;
+              gap: 0.5rem;
+              background: #ffb347;
+              color: #2a1800;
+              font-family: 'Barlow Condensed', sans-serif;
+              font-size: 0.85rem;
+              font-weight: 700;
+              letter-spacing: 0.1em;
+              text-transform: uppercase;
+              padding: 0.75rem 1.25rem;
+              text-decoration: none;
+            "
+          >
+            Continue to Coursera
+            <svg viewBox="0 0 13 13" fill="none" width="12" height="12">
+              <path
+                d="M1 12L12 1M12 1H5M12 1V8"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </a>
+          <button
+            onclick="
+              document.getElementById('access-modal').style.display = 'none'
+            "
+            style="
+              background: transparent;
+              border: 1.5px solid #ccc;
+              color: #555;
+              font-family: 'Barlow Condensed', sans-serif;
+              font-size: 0.85rem;
+              font-weight: 700;
+              letter-spacing: 0.1em;
+              text-transform: uppercase;
+              padding: 0.75rem 1.25rem;
+              cursor: pointer;
+            "
+          >
+            Go Back
+          </button>
+        </div>
       </div>
     </div>
-  </a>
-
-</div>
-
-</body>
+  </body>
 </html>

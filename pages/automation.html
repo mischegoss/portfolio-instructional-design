@@ -52,6 +52,34 @@
   .meta-label { font-size: 0.65rem; letter-spacing: 0.13em; text-transform: uppercase; color: rgba(255,255,255,0.35); font-weight: 600; }
   .meta-value { font-size: 0.88rem; color: rgba(255,255,255,0.8); font-weight: 500; }
 
+  /* Framing */
+  .framing {
+    max-width: 960px;
+    margin: 0 auto 3rem;
+    padding: 3rem 4rem 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+
+  .framing-heading {
+    font-size: 0.67rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #4ecfa0;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(78,207,160,0.2);
+  }
+
+  .framing p {
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.65);
+  }
+
+  /* White section */
   .white-section { background: #fff; padding: 3.5rem 0 5rem; }
   .white-inner { max-width: 720px; margin: 0 auto; padding: 0 2rem; }
 
@@ -95,19 +123,19 @@
 
   .launch-btn:hover { background: #6eddb5; gap: 0.85rem; }
   .launch-btn svg { width: 13px; height: 13px; }
-
   .launch-note { font-size: 0.78rem; color: #bbb; letter-spacing: 0.03em; }
 
   @media (max-width: 768px) {
     nav, .hero { padding-left: 1.5rem; padding-right: 1.5rem; }
     .white-inner { padding: 0 1.5rem; }
+    .framing { grid-template-columns: 1fr; padding: 2rem 1.5rem 0; gap: 2rem; }
   }
 </style>
 </head>
 <body>
 
 <nav>
-  <a href="portfolio-cards.html">
+  <a href="../index.html">
     <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M13 7H1M6 2L1 7l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
@@ -140,32 +168,59 @@
   </div>
 </div>
 
+<div class="framing">
+  <div class="framing-block">
+    <div class="framing-heading">My Role</div>
+    <p>I designed and built this module, including the instructional architecture, the interactive assessment, and the embedded AI assistant integration.</p>
+  </div>
+  <div class="framing-block">
+    <div class="framing-heading">The Design Challenge</div>
+    <p>The real barrier to automation adoption isn't technical knowledge. It's organizational confidence. Every design decision here addresses that specific problem.</p>
+  </div>
+</div>
+
 <div class="white-section">
   <div class="white-inner">
 
     <div class="ws-heading">About This Module</div>
-    <p>This module is the entry point to Resolve's automation learning program, designed to help IT teams move from "we should automate something" to a concrete first candidate with defined success criteria, in a single session.</p>
-    <p>The central challenge in automation adoption isn't technical. Most teams understand what automation can do. The block is knowing <strong>where to start</strong> and building enough internal confidence to move forward without waiting for a perfect use case. This module is built around that problem.</p>
+    <p>This module is the entry point to Resolve's automation learning program, designed to help IT teams move from thinking about automation to concrete first steps.</p>
 
     <div class="ws-heading">Design Decisions</div>
     <ul class="decision-list">
-      <li><strong>The Automatable persona</strong> exists because abstract change management advice doesn't stick. A named organization moving through the same journey as the learner creates emotional continuity across the program. Learners follow Automatable's progress rather than consuming isolated modules.</li>
-      <li><strong>The start-small framework</strong> (Choose → Define Success → Measure → Celebrate) is deliberately low-stakes. It's not a full automation methodology; it's a wedge. The goal is a single successful automation that builds internal credibility for the broader program, giving learners a replicable model they can apply immediately.</li>
-      <li><strong>Measurable outcomes are baked in from step one</strong> because adoption fails when teams can't demonstrate ROI. Defining success criteria before automating is an ID decision, not just a business one. It gives learners a concrete completion condition for the activity and a ready-made framework for communicating impact upward.</li>
-      <li><strong>The embedded assessment produces a downloadable artifact.</strong> The interactive form generates a completed automation candidate brief that learners can export as a PDF to share with managers or other decision-makers. The learning transfers directly into a real workflow conversation rather than staying inside the module.</li>
-      <li><strong>RANI, the embedded AI assistant</strong>, is positioned inside the module itself with pre-written prompt suggestions. This models AI-assisted workflow adoption in real time. Learners aren't just reading about AI tools; they're using one to complete the learning activity.</li>
+      <li><strong>The Automatable persona</strong> provides a concrete real-world example throughout each module, allowing the learner to see the progress from concept to implementation.</li>
+      <li><strong>The start-small framework</strong> (Choose → Define Success → Measure → Celebrate) is deliberately low-stakes to prevent overwhelming learners. The goal is a single successful automation to build credibility and provide a replicable model for success.</li>
+      <li><strong>Measurable outcomes are baked in from step one.</strong> This gives learners a concrete completion condition for the activity and a ready-made framework for communicating impact upward.</li>
+      <li><strong>The interactive form guides users step-by-step.</strong> It can also be exported as a PDF to share with other decision-makers, so the learning transfers directly into a real workflow conversation.</li>
+      <li><strong>RANI, the embedded AI assistant</strong>, is positioned inside the module itself to allow direct answers to learners' questions without leaving the learning space.</li>
     </ul>
 
     <div class="launch-row">
-      <a class="launch-btn" href="https://resolve-io.github.io/automation-identify/#/" target="_blank">
+      <button class="launch-btn" onclick="document.getElementById('demo-modal').style.display='flex'">
         Launch Live Module
         <svg viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M1 12L12 1M12 1H5M12 1V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-      </a>
-      <span class="launch-note">Opens in new tab</span>
+      </button>
     </div>
 
+  </div>
+</div>
+
+<!-- Modal -->
+<div id="demo-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:1000; align-items:center; justify-content:center; padding:1.5rem;">
+  <div style="background:#fff; max-width:480px; width:100%; padding:2rem; position:relative;">
+    <p style="font-size:0.65rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:#4ecfa0; margin-bottom:0.75rem;">Demo Version Note</p>
+    <p style="font-size:1rem; color:#0f1628; font-weight:600; line-height:1.4; margin-bottom:1rem; font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:0.03em;">This is a standalone preview</p>
+    <p style="font-size:0.93rem; color:#444; line-height:1.65; margin-bottom:1.75rem;">Links within the module are inactive, and the AI assistant and document download are only available in the full course deployment.</p>
+    <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+      <a href="https://resolve-io.github.io/automation-identify/#/" target="_blank" onclick="document.getElementById('demo-modal').style.display='none'" style="display:inline-flex; align-items:center; gap:0.5rem; background:#4ecfa0; color:#042e1e; font-family:'Barlow Condensed',sans-serif; font-size:0.85rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:0.75rem 1.25rem; text-decoration:none;">
+        Continue to Demo
+        <svg viewBox="0 0 13 13" fill="none" width="12" height="12"><path d="M1 12L12 1M12 1H5M12 1V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <button onclick="document.getElementById('demo-modal').style.display='none'" style="background:transparent; border:1.5px solid #ccc; color:#555; font-family:'Barlow Condensed',sans-serif; font-size:0.85rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:0.75rem 1.25rem; cursor:pointer;">
+        Go Back
+      </button>
+    </div>
   </div>
 </div>
 
