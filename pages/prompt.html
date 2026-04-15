@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prompt Engineering: Tamar Auber</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #080d1a;
+    color: #fff;
+    font-family: 'Barlow', sans-serif;
+    min-height: 100vh;
+  }
+
+  nav {
+    padding: 1.5rem 4rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  nav a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(255,255,255,0.45);
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: color 0.2s;
+  }
+
+  nav a:hover { color: #6b9fff; }
+  nav a svg { width: 13px; height: 13px; transition: transform 0.2s; }
+  nav a:hover svg { transform: translateX(-3px); }
+  nav .divider { color: rgba(255,255,255,0.15); font-size: 0.7rem; }
+  nav .current { color: rgba(255,255,255,0.6); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 400; }
+
+  .hero { padding: 3rem 4rem 2rem; max-width: 960px; }
+  .hero-tag { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: #6b9fff; margin-bottom: 0.75rem; font-weight: 600; }
+  .hero h1 { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 800; text-transform: uppercase; letter-spacing: 0.03em; line-height: 1.05; margin-bottom: 1.5rem; }
+  .hero h1 span { color: #6b9fff; }
+
+  .meta-row { display: flex; flex-wrap: wrap; gap: 2rem; padding: 1.25rem 0; border-top: 1px solid rgba(255,255,255,0.08); border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 2.5rem; }
+  .meta-item { display: flex; flex-direction: column; gap: 0.2rem; }
+  .meta-label { font-size: 0.65rem; letter-spacing: 0.13em; text-transform: uppercase; color: rgba(255,255,255,0.35); font-weight: 600; }
+  .meta-value { font-size: 0.88rem; color: rgba(255,255,255,0.8); font-weight: 500; }
+
+  .stat-bar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.06);
+    margin: 0 4rem;
+  }
+
+  .stat-cell { background: #0f1628; padding: 1.5rem 1.25rem; display: flex; flex-direction: column; gap: 0.35rem; }
+  .stat-number { font-family: 'Barlow Condensed', sans-serif; font-size: 2.2rem; font-weight: 800; color: #6b9fff; line-height: 1; letter-spacing: -0.01em; }
+  .stat-label { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.4); line-height: 1.3; }
+
+  .framing {
+    max-width: 960px;
+    margin: 0 auto 3rem;
+    padding: 3rem 4rem 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+
+  .framing-heading {
+    font-size: 0.67rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #6b9fff;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(107,159,255,0.2);
+  }
+
+  .framing p {
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.65);
+  }
+
+  /* White section */
+  .white-section { background: #fff; padding: 4rem 0 5rem; }
+  .white-inner { max-width: 720px; margin: 0 auto; padding: 0 2rem; }
+
+  .ws-section { margin-bottom: 3rem; padding-bottom: 3rem; border-bottom: 1px solid #e8e8e8; }
+  .ws-section:last-of-type { border-bottom: none; }
+
+  .ws-heading { font-family: 'Barlow Condensed', sans-serif; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #6b9fff; margin-bottom: 1rem; padding-bottom: 0.6rem; border-bottom: 1px solid #e0eaff; }
+
+  .white-section p { font-size: 1rem; line-height: 1.8; color: #2a2f3d; margin-bottom: 1rem; }
+  .white-section p:last-child { margin-bottom: 0; }
+  .white-section strong { color: #111; font-weight: 600; }
+
+  .ws-callout { background: #fdf6ec; border-left: 3px solid #ffb347; padding: 1rem 1.25rem; margin: 1.25rem 0; }
+  .ws-callout-label { font-size: 0.63rem; letter-spacing: 0.13em; text-transform: uppercase; color: #c8831a; font-weight: 700; margin-bottom: 0.4rem; }
+  .ws-callout p { font-size: 0.93rem; color: #3a3020; margin: 0 !important; line-height: 1.65; }
+
+  /* Incident block */
+  .incident-block {
+    background: #0f1628;
+    border: 1px solid rgba(107,159,255,0.15);
+    border-left: 3px solid #6b9fff;
+    padding: 1.25rem 1.5rem;
+    margin: 1.25rem 0;
+    font-family: 'Barlow Condensed', monospace;
+  }
+  .incident-comment { font-size: 0.78rem; color: rgba(107,159,255,0.5); margin-bottom: 0.6rem; letter-spacing: 0.05em; font-family: 'Barlow Condensed', sans-serif; }
+  .incident-row { display: flex; gap: 0.75rem; margin-bottom: 0.3rem; font-size: 0.85rem; }
+  .incident-key { color: #6b9fff; font-weight: 600; min-width: 110px; flex-shrink: 0; font-family: 'Barlow Condensed', sans-serif; letter-spacing: 0.05em; }
+  .incident-val { color: rgba(255,255,255,0.75); font-family: 'Barlow', sans-serif; font-size: 0.83rem; }
+
+  /* Component table */
+  .component-table { width: 100%; border-collapse: collapse; margin: 1.25rem 0; font-size: 0.9rem; }
+  .component-table th { background: #0f1628; color: #6b9fff; font-family: 'Barlow Condensed', sans-serif; font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.6rem 0.875rem; text-align: left; border: 1px solid rgba(107,159,255,0.15); }
+  .component-table td { padding: 0.7rem 0.875rem; border: 1px solid #e8e8e8; vertical-align: top; color: #2a2f3d; font-size: 0.88rem; line-height: 1.5; }
+  .component-table tr:nth-child(even) td { background: #f8f9ff; }
+  .component-table .comp-num { color: #aaa; font-size: 0.78rem; font-weight: 600; white-space: nowrap; }
+  .component-table .comp-name { font-weight: 600; color: #111; white-space: nowrap; }
+
+  /* Prompt block */
+  .prompt-block {
+    background: #f8f8f8;
+    border: 1px solid #e0e0e0;
+    border-left: 3px solid #888;
+    padding: 1.25rem 1.5rem;
+    margin: 1.25rem 0;
+    font-family: 'Courier New', monospace;
+    font-size: 0.78rem;
+    line-height: 1.7;
+    color: #2a2f3d;
+    white-space: pre-wrap;
+    overflow-x: auto;
+    max-height: 480px;
+    overflow-y: auto;
+  }
+  .prompt-block .comment { color: #888; font-weight: 600; }
+
+  /* Failure box */
+  .failure-box { background: #fff8f0; border-left: 3px solid #ffb347; padding: 1rem 1.25rem; margin: 1.25rem 0; }
+  .failure-label { font-size: 0.63rem; letter-spacing: 0.13em; text-transform: uppercase; color: #c8831a; font-weight: 700; margin-bottom: 0.6rem; }
+  .failure-item { font-size: 0.88rem; color: #3a3020; line-height: 1.6; margin-bottom: 0.35rem; padding-left: 1rem; position: relative; }
+  .failure-item::before { content: "·"; position: absolute; left: 0; color: #c8831a; font-weight: 700; }
+
+  /* Steps */
+  .steps-table { width: 100%; border-collapse: collapse; margin: 1.25rem 0; }
+  .steps-table td { padding: 0.65rem 0.875rem; border: 1px solid #e8e8e8; vertical-align: top; font-size: 0.88rem; color: #2a2f3d; line-height: 1.5; }
+  .steps-table tr:nth-child(even) td { background: #f8f9ff; }
+  .step-num { background: #0f1628 !important; color: #fff; font-weight: 700; font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; text-align: center; width: 36px; }
+
+  /* Principles box */
+  .principles-box { background: #f4f7ff; border-top: 2px solid #6b9fff; padding: 1.25rem 1.5rem; margin: 1.25rem 0; }
+  .principles-label { font-family: 'Barlow Condensed', sans-serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #1a2a6b; margin-bottom: 0.75rem; }
+  .principle-item { font-size: 0.88rem; color: #2a2f3d; line-height: 1.6; margin-bottom: 0.35rem; padding-left: 1.2rem; position: relative; }
+  .principle-item::before { content: "·"; position: absolute; left: 0; color: #6b9fff; font-weight: 700; }
+
+  /* Adapt table */
+  .adapt-table { width: 100%; border-collapse: collapse; margin: 1.25rem 0; font-size: 0.88rem; }
+  .adapt-table th { background: #0f1628; color: #6b9fff; font-family: 'Barlow Condensed', sans-serif; font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.6rem 0.875rem; text-align: left; border: 1px solid rgba(107,159,255,0.15); }
+  .adapt-table td { padding: 0.65rem 0.875rem; border: 1px solid #e8e8e8; vertical-align: top; color: #2a2f3d; line-height: 1.5; }
+  .adapt-table tr:nth-child(even) td { background: #f8f9ff; }
+  .adapt-table .comp-name { font-weight: 600; color: #111; }
+  .adapt-table .always { color: #1a2a6b; font-weight: 600; }
+
+  .ws-closing { font-family: 'Barlow Condensed', sans-serif; font-size: 1.4rem; font-weight: 600; letter-spacing: 0.02em; line-height: 1.4; color: #0f1628; border-left: 3px solid #6b9fff; padding: 0.75rem 1.25rem; background: #f4f7ff; margin-top: 2.5rem; }
+
+  @media (max-width: 768px) {
+    nav, .hero { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .stat-bar { margin-left: 1.5rem; margin-right: 1.5rem; grid-template-columns: 1fr; }
+    .hero h1 { font-size: 2rem; }
+    .framing { grid-template-columns: 1fr; padding: 2rem 1.5rem 0; gap: 2rem; }
+    .white-inner { padding: 0 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="https://mischegoss.github.io/portfolio-instructional-design/index.html">
+    <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M13 7H1M6 2L1 7l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Portfolio
+  </a>
+  <span class="divider">/</span>
+  <span class="current">Prompt Engineering</span>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag">Training Design · Prompt Engineering · AI Systems</div>
+  <h1>Prompt engineering:<br><span>when the model changes</span></h1>
+  <div class="meta-row">
+    <div class="meta-item">
+      <span class="meta-label">Format</span>
+      <span class="meta-value">30-min training + handout</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Audience</span>
+      <span class="meta-value">Support Engineers</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Context</span>
+      <span class="meta-value">Model migration (e.g., GPT-4o → GPT-4.1–class systems)</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Role</span>
+      <span class="meta-value">Instructional Designer · Documentation Engineer</span>
+    </div>
+  </div>
+</div>
+
+
+<div class="framing" style="grid-template-columns:1fr;">
+  <div class="framing-block">
+    <div class="framing-heading">The Design Challenge</div>
+    <p>A model change caused a silent failure in intent prediction. Output degraded without errors. The issue was not the intent descriptions themselves: it was how they were written. They relied on the model to infer missing context. This training converts that failure into a repeatable prompt engineering framework.</p>
+  </div>
+</div>
+
+<div class="white-section">
+  <div class="white-inner">
+
+    <div class="ws-section">
+      <div class="ws-heading">The Problem</div>
+
+      <div class="incident-block">
+        <div class="incident-comment">// incident summary</div>
+        <div class="incident-row"><span class="incident-key">system</span><span class="incident-val">AI-powered knowledge base</span></div>
+        <div class="incident-row"><span class="incident-key">component</span><span class="incident-val">Intent prediction</span></div>
+        <div class="incident-row"><span class="incident-key">trigger</span><span class="incident-val">Model migration</span></div>
+        <div class="incident-row"><span class="incident-key">failure_mode</span><span class="incident-val">Missing or incomplete routing output (no error surfaced)</span></div>
+        <div class="incident-row"><span class="incident-key">impact</span><span class="incident-val">Incorrect content surfaced to users; support volume increased</span></div>
+        <div class="incident-row"><span class="incident-key">root_cause</span><span class="incident-val">Prompts relied on implicit inference instead of explicit inputs</span></div>
+        <div class="incident-row"><span class="incident-key">scope</span><span class="incident-val">All intent descriptions dependent on inference</span></div>
+      </div>
+
+      <p>Models vary in how they handle incomplete inputs: some tolerate gaps, others do not. The failure was not in the descriptions—it was in assuming the model would fill in gaps.</p>
+
+      <div class="ws-callout">
+        <div class="ws-callout-label">Root cause in one line</div>
+        <p>The model follows what is written, not what is implied.</p>
+      </div>
+    </div>
+
+    <div class="ws-section">
+      <div class="ws-heading">The Solution: Structured Prompt Engineering</div>
+
+      <p>Structured prompting replaces implicit assumptions with explicit requirements. The prompt becomes the system specification. A reliable prompt has five components:</p>
+
+      <table class="component-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Component</th>
+            <th>Function</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="comp-num">01</td>
+            <td class="comp-name">Role assignment</td>
+            <td>Sets context for how the model interprets the task. A model given routing context behaves differently than one without it.</td>
+          </tr>
+          <tr>
+            <td class="comp-num">02</td>
+            <td class="comp-name">Constraint framing</td>
+            <td>Defines what the output must optimize for. Shifts the model's priority from readability to completeness and coverage.</td>
+          </tr>
+          <tr>
+            <td class="comp-num">03</td>
+            <td class="comp-name">Staged logic</td>
+            <td>Guard clause. Stage 1 checks that required inputs are present. If correctly implemented, the model should ask for clarification rather than generating on incomplete inputs.</td>
+          </tr>
+          <tr>
+            <td class="comp-num">04</td>
+            <td class="comp-name">Explicit rules</td>
+            <td>Clear, non-conflicting rules reduce variation and improve consistency at scale. Each rule removes a model decision.</td>
+          </tr>
+          <tr>
+            <td class="comp-num">05</td>
+            <td class="comp-name">Output format control</td>
+            <td>If output feeds a downstream system, format is a requirement, not a preference. Format violations are data quality issues.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="principles-box">
+        <div class="principles-label">Core principles</div>
+        <div class="principle-item">Do not rely on model inference: encode requirements explicitly</div>
+        <div class="principle-item">Validate inputs before generating output</div>
+        <div class="principle-item">Constrain structure and format to system requirements</div>
+        <div class="principle-item">Design for consistency over readability</div>
+        <div class="principle-item">Model behavior may change; system requirements should not</div>
+      </div>
+    </div>
+
+    <div class="ws-section">
+      <div class="ws-heading">The Full Prompt</div>
+
+      <p>Designed for models that require explicit instructions and do not reliably infer missing context. Performance may vary across models. Replace <code style="font-size:0.85rem;background:#f0f0f0;padding:1px 5px;border-radius:3px;">[system name]</code> and complete the input fields before use.</p>
+
+      <div class="prompt-block"><span class="comment">/* ROLE ASSIGNMENT */</span>
+You are generating an intent description for [system name], an AI-powered
+knowledge base that matches user queries to content using intent prediction.
+
+The system requires clear, explicit, and complete inputs to route correctly.
+
+<span class="comment">/* STAGED LOGIC */</span>
+STAGE 1: VALIDATE INPUT
+
+Check all conditions before generating output:
+  1. Intent name is present.
+  2. A clear ACTION and OBJECT are defined.
+  3. Description is specific enough to avoid matching unrelated intents.
+If any condition is missing, ask only the missing questions.
+Do not generate output.
+
+STAGE 2: GENERATE DESCRIPTION
+
+You may use words from the input, direct synonyms, and common automation
+terms: webhook, workflow, automation, API, request, trigger, action, process.
+Only include logic explicitly stated or clearly implied by the action-object pair.
+
+<span class="comment">/* EXPLICIT RULES */</span>
+
+RULE 1: DEFINITION
+
+Write 1-2 sentences defining what the intent does and when it is used.
+
+
+RULE 2: TRIGGER COVERAGE
+
+Write a short "Use this intent when..." section.
+Use verbs: trigger, run, start, execute, launch, invoke, call, fire.
+Apply to action + object in combined phrases. Do not list separately.
+
+
+RULE 3: EXAMPLES (generate 6-10 phrases total, do not exceed 10)
+Generate user phrases across four registers:
+  - Formal sentences (2-3)
+  - Short commands (2-3)
+  - Minimal inputs (1-2)
+  - Same intent, different word order (1-2)
+Keep phrases short.
+
+
+RULE 4: WHEN TO USE
+
+One paragraph stating when this intent should fire.
+
+
+RULE 5: DO NOT USE
+
+State when this intent must NOT fire. Always include:
+Do not use for informational queries, status checks, or non-action requests.
+
+
+RULE 6: STYLE
+
+Simple language. Short sentences. No marketing tone.
+
+<span class="comment">/* OUTPUT FORMAT CONTROL */</span>
+
+RULE 7: OUTPUT FORMAT
+
+Return only plain text. No markdown. No explanations.
+
+Output must include exactly these sections in this order:
+  Definition / Trigger Coverage / Examples / When To Use / Do Not Use
+
+<span class="comment">/* INPUTS */</span>
+Intent name: [INSERT INTENT NAME]
+Plain description: [INSERT PLAIN DESCRIPTION]</div>
+
+      <div class="failure-box">
+        <div class="failure-label">Common failure patterns</div>
+        <div class="failure-item">Missing action or object → validation triggers; resolve before continuing</div>
+        <div class="failure-item">Too few examples → poor query matching coverage</div>
+        <div class="failure-item">Overly broad description → false positives</div>
+        <div class="failure-item">Validation step omitted → incomplete inputs generate invalid output</div>
+        <div class="failure-item">Incorrect format → output cannot be used downstream</div>
+      </div>
+
+      <p style="font-size:0.88rem;font-weight:600;color:#1a2a6b;margin-top:1.25rem;margin-bottom:0.5rem;">How to run it</p>
+      <table class="steps-table">
+        <tbody>
+          <tr><td class="step-num">1</td><td>Open your AI model interface.</td></tr>
+          <tr><td class="step-num">2</td><td>Replace <code style="font-size:0.82rem;background:#f0f0f0;padding:1px 4px;border-radius:2px;">[system name]</code> and complete the input fields at the bottom.</td></tr>
+          <tr><td class="step-num">3</td><td>Submit the prompt.</td></tr>
+          <tr><td class="step-num">4</td><td>If a clarification is requested, provide the missing input before proceeding.</td></tr>
+          <tr><td class="step-num">5</td><td>Verify all five sections are present and correctly ordered.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ws-section">
+      <div class="ws-heading">Takeaway</div>
+
+      <p>Prompts fail when they rely on inference. Explicit structure—role, constraints, validation, rules, and format—encodes system requirements and improves reliability across model changes.</p>
+
+      <p style="font-size:0.88rem;font-weight:600;color:#1a2a6b;margin-top:1.25rem;margin-bottom:0.5rem;">When to adapt vs. what to keep</p>
+      <table class="adapt-table">
+        <thead>
+          <tr><th>Component</th><th>When adapting</th><th>What changes</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="comp-name">Role assignment</td><td class="always">Always</td><td>System name and function</td></tr>
+          <tr><td class="comp-name">Constraint framing</td><td>If logic differs</td><td>Matching or classification requirements</td></tr>
+          <tr><td class="comp-name">Staged logic</td><td>If inputs differ</td><td>Validation conditions</td></tr>
+          <tr><td class="comp-name">Explicit rules</td><td class="always">Always</td><td>Output structure and vocabulary</td></tr>
+          <tr><td class="comp-name">Output format control</td><td>If destination differs</td><td>Required format</td></tr>
+        </tbody>
+      </table>
+
+      <p style="font-size:0.88rem;font-weight:600;color:#1a2a6b;margin-top:1.75rem;margin-bottom:0.5rem;">Example: Same Pattern, Different Problem</p>
+      <p>Use case: Classifying support tickets by category.</p>
+
+      <table class="adapt-table" style="margin-top:0.75rem;">
+        <thead>
+          <tr><th>Component</th><th>Application</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="comp-name">Role assignment</td><td>Classify tickets for routing</td></tr>
+          <tr><td class="comp-name">Constraint framing</td><td>Use fixed category taxonomy</td></tr>
+          <tr><td class="comp-name">Staged logic</td><td>Validate ticket has enough context</td></tr>
+          <tr><td class="comp-name">Explicit rules</td><td>One category only; no invention</td></tr>
+          <tr><td class="comp-name">Output format control</td><td>Return category name only</td></tr>
+        </tbody>
+      </table>
+
+      <div class="ws-closing">
+        The model follows what is written, not what is implied. Structure the prompt, and the output becomes consistent, testable, and reusable across systems and model changes.
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+</body>
+</html>
