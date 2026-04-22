@@ -1,319 +1,559 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Prompt Engineering — Enablement Packet · Tamar Auber</title>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prompt Engineering — Enablement Packet · Tamar Auber</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-  html { font-size: 18px; }
+      html {
+        font-size: 18px;
+      }
 
-  body {
-    background: #080d1a;
-    color: #fff;
-    font-family: 'Barlow', sans-serif;
-    font-size: 1.05rem;
-    line-height: 1.6;
-    min-height: 100vh;
-  }
+      body {
+        background: #080d1a;
+        color: #fff;
+        font-family: 'Barlow', sans-serif;
+        font-size: 1.05rem;
+        line-height: 1.6;
+        min-height: 100vh;
+      }
 
-  nav {
-    padding: 1.5rem 4rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-  }
+      nav {
+        padding: 1.5rem 4rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
 
-  nav a {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: rgba(255,255,255,0.55);
-    text-decoration: none;
-    font-size: 0.88rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    font-weight: 600;
-    transition: color 0.2s;
-  }
+      nav a {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: rgba(255, 255, 255, 0.55);
+        text-decoration: none;
+        font-size: 0.88rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-weight: 600;
+        transition: color 0.2s;
+      }
 
-  nav a:hover { color: #6b9fff; }
-  nav a svg { width: 15px; height: 15px; transition: transform 0.2s; }
-  nav a:hover svg { transform: translateX(-3px); }
-  nav .divider { color: rgba(255,255,255,0.15); font-size: 0.8rem; }
-  nav .current { color: rgba(255,255,255,0.7); font-size: 0.88rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 400; }
+      nav a:hover {
+        color: #6b9fff;
+      }
+      nav a svg {
+        width: 15px;
+        height: 15px;
+        transition: transform 0.2s;
+      }
+      nav a:hover svg {
+        transform: translateX(-3px);
+      }
+      nav .divider {
+        color: rgba(255, 255, 255, 0.15);
+        font-size: 0.8rem;
+      }
+      nav .current {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.88rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-weight: 400;
+      }
 
-  .hero { padding: 3.5rem 4rem 2rem; max-width: 1040px; }
-  .hero-tag { font-size: 0.82rem; letter-spacing: 0.15em; text-transform: uppercase; color: #6b9fff; margin-bottom: 1rem; font-weight: 600; }
-  .hero h1 { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(2.4rem, 4.5vw, 3.8rem); font-weight: 800; text-transform: uppercase; letter-spacing: 0.03em; line-height: 1.05; margin-bottom: 1.75rem; }
-  .hero h1 span { color: #6b9fff; }
+      .hero {
+        padding: 3.5rem 4rem 2rem;
+        max-width: 1040px;
+      }
+      .hero-tag {
+        font-size: 0.82rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: #6b9fff;
+        margin-bottom: 1rem;
+        font-weight: 600;
+      }
+      .hero h1 {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        line-height: 1.05;
+        margin-bottom: 1.75rem;
+      }
+      .hero h1 span {
+        color: #6b9fff;
+      }
 
-  .meta-row { display: flex; flex-wrap: wrap; gap: 2.25rem; padding: 1.4rem 0; border-top: 1px solid rgba(255,255,255,0.08); border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 2.5rem; }
-  .meta-item { display: flex; flex-direction: column; gap: 0.3rem; }
-  .meta-label { font-size: 0.75rem; letter-spacing: 0.13em; text-transform: uppercase; color: rgba(255,255,255,0.4); font-weight: 600; }
-  .meta-value { font-size: 1rem; color: rgba(255,255,255,0.85); font-weight: 500; }
+      .meta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2.25rem;
+        padding: 1.4rem 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        margin-bottom: 2.5rem;
+      }
+      .meta-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+      }
+      .meta-label {
+        font-size: 0.75rem;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.4);
+        font-weight: 600;
+      }
+      .meta-value {
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.85);
+        font-weight: 500;
+      }
 
-  .framing {
-    max-width: 1040px;
-    margin: 0 auto 3rem;
-    padding: 3rem 4rem 0;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-  }
+      .framing {
+        max-width: 1040px;
+        margin: 0 auto 3rem;
+        padding: 3rem 4rem 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+      }
 
-  .framing-heading {
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: #6b9fff;
-    margin-bottom: 0.9rem;
-    padding-bottom: 0.55rem;
-    border-bottom: 1px solid rgba(107,159,255,0.2);
-  }
+      .framing-heading {
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #6b9fff;
+        margin-bottom: 0.9rem;
+        padding-bottom: 0.55rem;
+        border-bottom: 1px solid rgba(107, 159, 255, 0.2);
+      }
 
-  .framing p {
-    font-size: 1.08rem;
-    line-height: 1.8;
-    color: rgba(255,255,255,0.75);
-  }
+      .framing p {
+        font-size: 1.08rem;
+        line-height: 1.8;
+        color: rgba(255, 255, 255, 0.75);
+      }
 
-  /* White section */
-  .white-section { background: #fff; padding: 4.5rem 0 5.5rem; }
-  .white-inner { max-width: 780px; margin: 0 auto; padding: 0 2rem; }
+      /* White section */
+      .white-section {
+        background: #fff;
+        padding: 4.5rem 0 5.5rem;
+      }
+      .white-inner {
+        max-width: 780px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
 
-  .ws-section { margin-bottom: 3.25rem; padding-bottom: 3.25rem; border-bottom: 1px solid #e8e8e8; }
-  .ws-section:last-of-type { border-bottom: none; }
+      .ws-section {
+        margin-bottom: 3.25rem;
+        padding-bottom: 3.25rem;
+        border-bottom: 1px solid #e8e8e8;
+      }
+      .ws-section:last-of-type {
+        border-bottom: none;
+      }
 
-  .ws-heading { font-family: 'Barlow Condensed', sans-serif; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #6b9fff; margin-bottom: 1.15rem; padding-bottom: 0.7rem; border-bottom: 1px solid #e0eaff; }
+      .ws-heading {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: #6b9fff;
+        margin-bottom: 1.15rem;
+        padding-bottom: 0.7rem;
+        border-bottom: 1px solid #e0eaff;
+      }
 
-  .white-section p { font-size: 1.12rem; line-height: 1.75; color: #2a2f3d; margin-bottom: 1.15rem; }
-  .white-section p:last-child { margin-bottom: 0; }
-  .white-section strong { color: #111; font-weight: 600; }
+      .white-section p {
+        font-size: 1.12rem;
+        line-height: 1.75;
+        color: #2a2f3d;
+        margin-bottom: 1.15rem;
+      }
+      .white-section p:last-child {
+        margin-bottom: 0;
+      }
+      .white-section strong {
+        color: #111;
+        font-weight: 600;
+      }
 
-  .ws-callout { background: #fdf6ec; border-left: 3px solid #ffb347; padding: 1.1rem 1.4rem; margin: 1.4rem 0 0; }
-  .ws-callout-label { font-size: 0.75rem; letter-spacing: 0.13em; text-transform: uppercase; color: #c8831a; font-weight: 700; margin-bottom: 0.5rem; }
-  .ws-callout p { font-size: 1.05rem; color: #3a3020; margin: 0 !important; line-height: 1.65; }
+      .ws-callout {
+        background: #fdf6ec;
+        border-left: 3px solid #ffb347;
+        padding: 1.1rem 1.4rem;
+        margin: 1.4rem 0 0;
+      }
+      .ws-callout-label {
+        font-size: 0.75rem;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        color: #c8831a;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+      }
+      .ws-callout p {
+        font-size: 1.05rem;
+        color: #3a3020;
+        margin: 0 !important;
+        line-height: 1.65;
+      }
 
-  /* Communication structure grid */
-  .comm-structure {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
-    margin: 1.75rem 0;
-  }
-  .comm-tier {
-    background: #fafbfc;
-    border: 1px solid #e4e6ea;
-    border-left: 4px solid #6b9fff;
-    padding: 1.75rem 2rem;
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    column-gap: 2rem;
-    align-items: center;
-    grid-template-areas:
-      "num audience button"
-      "num focus button"
-      "num deliverable button";
-  }
-  .comm-tier-num {
-    grid-area: num;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 3.5rem;
-    font-weight: 800;
-    color: #6b9fff;
-    line-height: 1;
-    letter-spacing: -0.02em;
-  }
-  .comm-tier-audience {
-    grid-area: audience;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: #0f1628;
-    margin-bottom: 0.35rem;
-  }
-  .comm-tier-focus {
-    grid-area: focus;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 1.35rem;
-    font-weight: 700;
-    color: #1a2a6b;
-    line-height: 1.2;
-    letter-spacing: 0.005em;
-    margin-bottom: 0.45rem;
-  }
-  .comm-tier-deliverable {
-    grid-area: deliverable;
-    font-size: 1rem;
-    color: #3a3f4d;
-    line-height: 1.55;
-  }
-  .comm-tier-button {
-    grid-area: button;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: #6b9fff;
-    color: #080d1a;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.82rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 0.85rem 1.4rem;
-    text-decoration: none;
-    white-space: nowrap;
-    align-self: center;
-    justify-self: end;
-    transition: background 0.2s;
-  }
-  .comm-tier-button:hover { background: #8ab5ff; }
-  .comm-tier-button svg { width: 11px; height: 11px; flex-shrink: 0; }
+      /* Communication structure grid */
+      .comm-structure {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+        margin: 1.75rem 0;
+      }
+      .comm-tier {
+        background: #fafbfc;
+        border: 1px solid #e4e6ea;
+        border-left: 4px solid #6b9fff;
+        padding: 1.75rem 2rem;
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        column-gap: 2rem;
+        align-items: center;
+        grid-template-areas:
+          'num audience button'
+          'num focus button'
+          'num deliverable button';
+      }
+      .comm-tier-num {
+        grid-area: num;
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: 3.5rem;
+        font-weight: 800;
+        color: #6b9fff;
+        line-height: 1;
+        letter-spacing: -0.02em;
+      }
+      .comm-tier-audience {
+        grid-area: audience;
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #0f1628;
+        margin-bottom: 0.35rem;
+      }
+      .comm-tier-focus {
+        grid-area: focus;
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: #1a2a6b;
+        line-height: 1.2;
+        letter-spacing: 0.005em;
+        margin-bottom: 0.45rem;
+      }
+      .comm-tier-deliverable {
+        grid-area: deliverable;
+        font-size: 1rem;
+        color: #3a3f4d;
+        line-height: 1.55;
+      }
+      .comm-tier-button {
+        grid-area: button;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: #6b9fff;
+        color: #080d1a;
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 0.85rem 1.4rem;
+        text-decoration: none;
+        white-space: nowrap;
+        align-self: center;
+        justify-self: end;
+        transition: background 0.2s;
+      }
+      .comm-tier-button:hover {
+        background: #8ab5ff;
+      }
+      .comm-tier-button svg {
+        width: 11px;
+        height: 11px;
+        flex-shrink: 0;
+      }
 
-  .ws-closing { font-family: 'Barlow Condensed', sans-serif; font-size: 1.6rem; font-weight: 600; letter-spacing: 0.02em; line-height: 1.4; color: #0f1628; border-left: 3px solid #6b9fff; padding: 1rem 1.4rem; background: #f4f7ff; margin-top: 2.75rem; }
+      .ws-closing {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: 1.6rem;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        line-height: 1.4;
+        color: #0f1628;
+        border-left: 3px solid #6b9fff;
+        padding: 1rem 1.4rem;
+        background: #f4f7ff;
+        margin-top: 2.75rem;
+      }
 
-  @media (max-width: 768px) {
-    html { font-size: 17px; }
-    nav, .hero { padding-left: 1.5rem; padding-right: 1.5rem; }
-    .hero h1 { font-size: 2.2rem; }
-    .framing { grid-template-columns: 1fr; padding: 2rem 1.5rem 0; gap: 2rem; }
-    .white-inner { padding: 0 1.5rem; }
-    .comm-structure { gap: 1rem; }
-    .comm-tier {
-      grid-template-columns: 1fr;
-      grid-template-areas:
-        "num"
-        "audience"
-        "focus"
-        "deliverable"
-        "button";
-      padding: 1.5rem 1.5rem;
-      row-gap: 0.35rem;
-    }
-    .comm-tier-num { font-size: 2.6rem; margin-bottom: 0.25rem; }
-    .comm-tier-button { justify-self: flex-start; margin-top: 0.75rem; }
-  }
-</style>
-</head>
-<body>
+      @media (max-width: 768px) {
+        html {
+          font-size: 17px;
+        }
+        nav,
+        .hero {
+          padding-left: 1.5rem;
+          padding-right: 1.5rem;
+        }
+        .hero h1 {
+          font-size: 2.2rem;
+        }
+        .framing {
+          grid-template-columns: 1fr;
+          padding: 2rem 1.5rem 0;
+          gap: 2rem;
+        }
+        .white-inner {
+          padding: 0 1.5rem;
+        }
+        .comm-structure {
+          gap: 1rem;
+        }
+        .comm-tier {
+          grid-template-columns: 1fr;
+          grid-template-areas:
+            'num'
+            'audience'
+            'focus'
+            'deliverable'
+            'button';
+          padding: 1.5rem 1.5rem;
+          row-gap: 0.35rem;
+        }
+        .comm-tier-num {
+          font-size: 2.6rem;
+          margin-bottom: 0.25rem;
+        }
+        .comm-tier-button {
+          justify-self: flex-start;
+          margin-top: 0.75rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a
+        href="https://mischegoss.github.io/portfolio-instructional-design/index.html"
+      >
+        <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M13 7H1M6 2L1 7l5 5"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        Portfolio
+      </a>
+      <span class="divider">/</span>
+      <span class="current">Prompt Engineering</span>
+    </nav>
 
-<nav>
-  <a href="https://mischegoss.github.io/portfolio-instructional-design/index.html">
-    <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M13 7H1M6 2L1 7l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    Portfolio
-  </a>
-  <span class="divider">/</span>
-  <span class="current">Prompt Engineering</span>
-</nav>
-
-<div class="hero">
-  <div class="hero-tag">Training Design · Enablement Packet · AI Systems</div>
-  <h1>Build a better description:<br><span>Prompt engineering for intent improvement</span></h1>
-  <div class="meta-row">
-    <div class="meta-item">
-      <span class="meta-label">Format</span>
-      <span class="meta-value">Three-artifact enablement packet</span>
-    </div>
-    <div class="meta-item">
-      <span class="meta-label">Audiences</span>
-      <span class="meta-value">Leadership · Management · Support Engineering</span>
-    </div>
-    <div class="meta-item">
-      <span class="meta-label">Context</span>
-      <span class="meta-value">Post-migration training · Intent description reliability</span>
-    </div>
-    <div class="meta-item">
-      <span class="meta-label">Role</span>
-      <span class="meta-value">Instructional Designer · Documentation Engineer</span>
-    </div>
-  </div>
-</div>
-
-<div class="framing" style="grid-template-columns:1fr;">
-  <div class="framing-block">
-    <div class="framing-heading">The Packet</div>
-    <p>A recent LLM model migration caused intent prediction in our AI-powered knowledge base to silently fail. The previous ChatGPT model tolerated descriptions that relied on inference; the new model does not. This packet is the communication structure that surrounds the training built to fix it &mdash; three artifacts, each pitched to the audience that needs to act on it.</p>
-  </div>
-</div>
-
-<div class="white-section">
-  <div class="white-inner">
-
-    <div class="ws-section">
-      <div class="ws-heading">The Situation</div>
-
-      <p>The training is a 30-minute working session for Support Engineering. The packet surrounding it is the communication structure &mdash; the pieces written for the three audiences the training needs to land with in order to succeed.</p>
-
-      <div class="ws-callout">
-        <div class="ws-callout-label">The principle</div>
-        <p>The model follows what is written in the description, not what is implied.</p>
+    <div class="hero">
+      <div class="hero-tag">
+        Training Design · Enablement Packet · AI Systems
+      </div>
+      <h1>
+        Build a better description:<br /><span
+          >Prompt engineering for intent improvement</span
+        >
+      </h1>
+      <div class="meta-row">
+        <div class="meta-item">
+          <span class="meta-label">Format</span>
+          <span class="meta-value">Three-artifact enablement packet</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Audiences</span>
+          <span class="meta-value"
+            >Leadership · Management · Support Engineering</span
+          >
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Context</span>
+          <span class="meta-value"
+            >Post-migration training · Intent description reliability</span
+          >
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Role</span>
+          <span class="meta-value"
+            >Instructional Designer · Documentation Engineer</span
+          >
+        </div>
       </div>
     </div>
 
-    <div class="ws-section">
-      <div class="ws-heading">Layered Communication</div>
-
-      <p>Enterprise enablement works best when each audience receives the version of the story they need to act on their role. This packet is structured in three tiers, progressing from business case to oversight to execution:</p>
-
-      <div class="comm-structure">
-        <div class="comm-tier">
-          <div class="comm-tier-num">01</div>
-          <div class="comm-tier-audience">Leadership</div>
-          <div class="comm-tier-focus">WHY (Business Case)</div>
-          <div class="comm-tier-deliverable">This establishes the business 'why' and defines the ask for leadership support.</div>
-          <a href="promptemail.html" class="comm-tier-button">
-            View Email
-            <svg viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M1 12L12 1M12 1H5M12 1V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
-        </div>
-        <div class="comm-tier">
-          <div class="comm-tier-num">02</div>
-          <div class="comm-tier-audience">Management</div>
-          <div class="comm-tier-focus">WHY + HOW (Oversight)</div>
-          <div class="comm-tier-deliverable">This explains why the training is necessary and how to manage and reinforce team performance.</div>
-          <a href="promptmanager.html" class="comm-tier-button">
-            View Manager Brief
-            <svg viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M1 12L12 1M12 1H5M12 1V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
-        </div>
-        <div class="comm-tier">
-          <div class="comm-tier-num">03</div>
-          <div class="comm-tier-audience">Support Engineering</div>
-          <div class="comm-tier-focus">HOW (Execution)</div>
-          <div class="comm-tier-deliverable">The tactical handout and reference guide for the engineers performing the daily work.</div>
-          <a href="promptlearner.html" class="comm-tier-button">
-            View Field Guide
-            <svg viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M1 12L12 1M12 1H5M12 1V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
-        </div>
-      </div>
-
-      <p>Each artifact is self-contained. A leader can make a decision from the email alone. A manager has everything needed to reinforce the training afterward. An engineer has a reference they can return to while actually writing descriptions.</p>
-    </div>
-
-    <div class="ws-section">
-      <div class="ws-closing">
-        Three audiences. Three artifacts. Each tailored to convey the why and how.
+    <div class="framing" style="grid-template-columns: 1fr">
+      <div class="framing-block">
+        <div class="framing-heading">The Packet</div>
+        <p>
+          A recent LLM model migration caused intent prediction in our
+          AI-powered knowledge base to silently fail. The previous ChatGPT model
+          tolerated descriptions that relied on inference; the new model does
+          not. This packet is the communication structure that surrounds the
+          training built to fix it &mdash; three artifacts, each pitched to the
+          audience that needs to act on it.
+        </p>
       </div>
     </div>
 
-  </div>
-</div>
+    <div class="white-section">
+      <div class="white-inner">
+        <div class="ws-section">
+          <div class="ws-heading">The Situation</div>
 
-</body>
+          <p>
+            The training is a 30-minute working session for Support Engineering.
+            The packet surrounding it is the communication structure &mdash; the
+            pieces written for the three audiences the training needs to land
+            with in order to succeed.
+          </p>
+
+          <div class="ws-callout">
+            <div class="ws-callout-label">The principle</div>
+            <p>
+              The model follows what is written in the intent description, not
+              what is implied.
+            </p>
+          </div>
+        </div>
+
+        <div class="ws-section">
+          <div class="ws-heading">Layered Communication</div>
+
+          <p>
+            Enterprise enablement works best when each audience receives the
+            version of the story they need to act on their role. This packet is
+            structured in three tiers, progressing from business case to
+            oversight to execution:
+          </p>
+
+          <div class="comm-structure">
+            <div class="comm-tier">
+              <div class="comm-tier-num">01</div>
+              <div class="comm-tier-audience">Leadership</div>
+              <div class="comm-tier-focus">WHY (Business Case)</div>
+              <div class="comm-tier-deliverable">
+                This establishes the business 'why' and defines the ask for
+                leadership support.
+              </div>
+              <a href="promptemail.html" class="comm-tier-button">
+                View Email
+                <svg
+                  viewBox="0 0 13 13"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1 12L12 1M12 1H5M12 1V8"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </a>
+            </div>
+            <div class="comm-tier">
+              <div class="comm-tier-num">02</div>
+              <div class="comm-tier-audience">Management</div>
+              <div class="comm-tier-focus">WHY + HOW (Oversight)</div>
+              <div class="comm-tier-deliverable">
+                This explains why the training is necessary and how to manage
+                and reinforce team performance.
+              </div>
+              <a href="promptmanager.html" class="comm-tier-button">
+                View Manager Brief
+                <svg
+                  viewBox="0 0 13 13"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1 12L12 1M12 1H5M12 1V8"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </a>
+            </div>
+            <div class="comm-tier">
+              <div class="comm-tier-num">03</div>
+              <div class="comm-tier-audience">Support Engineering</div>
+              <div class="comm-tier-focus">HOW (Execution)</div>
+              <div class="comm-tier-deliverable">
+                The tactical handout and reference guide for the engineers
+                performing the daily work.
+              </div>
+              <a href="promptlearner.html" class="comm-tier-button">
+                View Field Guide
+                <svg
+                  viewBox="0 0 13 13"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1 12L12 1M12 1H5M12 1V8"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <p>
+            Each artifact is self-contained. A leader can make a decision from
+            the email alone. A manager has everything needed to reinforce the
+            training afterward. An engineer has a reference they can return to
+            while actually writing descriptions.
+          </p>
+        </div>
+
+        <div class="ws-section">
+          <div class="ws-closing">
+            Three audiences. Three artifacts. Each tailored to convey the why
+            and how.
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
