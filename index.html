@@ -47,6 +47,34 @@
         color: #fff;
       }
 
+      .hero-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        background: #6b9fff;
+        color: #080d1a;
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: 0.9rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 0.85rem 1.75rem;
+        text-decoration: none;
+        margin-top: 1.75rem;
+        transition: background 0.2s ease;
+        max-width: 100%;
+      }
+
+      .hero-button:hover {
+        background: #8ab5ff;
+      }
+
+      .hero-button svg {
+        width: 13px;
+        height: 13px;
+        flex-shrink: 0;
+      }
+
       .grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -61,6 +89,12 @@
         }
         header {
           padding: 2rem 1.5rem;
+        }
+        .hero-button {
+          font-size: 0.78rem;
+          padding: 0.75rem 1.25rem;
+          letter-spacing: 0.08em;
+          margin-top: 1.25rem;
         }
       }
 
@@ -217,6 +251,22 @@
     <header>
       <p>Instructional Design Portfolio</p>
       <h1>Tamar Auber</h1>
+      <a class="hero-button" href="./pages/prompt.html">
+        Go to Prompt Engineering How and Why Example
+        <svg
+          viewBox="0 0 13 13"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M1 12L12 1M12 1H5M12 1V8"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </a>
     </header>
 
     <div class="grid">
