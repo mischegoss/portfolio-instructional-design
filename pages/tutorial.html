@@ -448,6 +448,75 @@
         margin: 3rem 0 2.5rem;
       }
 
+      .sample-label {
+        display: inline-block;
+        font-size: 0.62rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: #888;
+        background: #f2f2f5;
+        padding: 0.22rem 0.55rem;
+        margin-bottom: 0.7rem;
+        border-left: 2px solid #a678ff;
+      }
+
+      .bridge-note {
+        font-size: 0.88rem;
+        color: #555;
+        line-height: 1.6;
+        background: #fafafc;
+        border: 1px dashed #d8d8de;
+        padding: 0.75rem 1rem;
+        margin-bottom: 1.5rem;
+      }
+      .bridge-note strong {
+        color: #0f1628;
+      }
+
+      .sequence-diagram {
+        margin: 1.25rem 0 0.5rem;
+        background: #fafafc;
+        border: 1px solid #ececf2;
+        padding: 1.25rem 0.75rem 0.75rem;
+      }
+      .sequence-diagram svg {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+      .sequence-caption {
+        font-size: 0.78rem;
+        color: #888;
+        text-align: center;
+        margin-top: 0.6rem;
+        font-style: italic;
+      }
+
+      .code-block {
+        display: block;
+        background: #0f1628;
+        color: #d9e3ff;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 0.88rem;
+        padding: 0.7rem 0.9rem;
+        margin: 0.35rem 0 0;
+        border-left: 3px solid #a678ff;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+      .code-block-wrap {
+        margin: 1rem 0;
+      }
+      .code-block-label {
+        font-size: 0.62rem;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        color: #888;
+        font-weight: 700;
+        display: block;
+      }
+
       @media (max-width: 768px) {
         nav,
         .hero {
@@ -462,7 +531,7 @@
   </head>
   <body>
     <nav>
-      <a href="portfolio-cards.html">
+      <a href="../index.html">
         <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M13 7H1M6 2L1 7l5 5"
@@ -512,6 +581,7 @@
         </div>
 
         <div class="ws-section">
+          <div class="sample-label">Sample 1 of 2</div>
           <div class="part-heading">ARIA Integration — System Overview</div>
           <div class="part-meta">
             Conceptual overview &nbsp;·&nbsp; Reading time: 4 minutes
@@ -579,6 +649,225 @@
             — the plumbing is invisible.
           </p>
 
+          <div
+            class="sequence-diagram"
+            role="img"
+            aria-label="Sequence diagram showing the bi-directional flow: User sends a request to HelixBot; HelixBot collects information, then POSTs a JSON webhook to FlowEngine; FlowEngine executes the workflow and returns a callback response; HelixBot displays the result to the user."
+          >
+            <svg viewBox="0 0 680 340" xmlns="http://www.w3.org/2000/svg">
+              <!-- Column headers -->
+              <g
+                font-family="Barlow Condensed, sans-serif"
+                font-weight="700"
+                font-size="13"
+                text-anchor="middle"
+                letter-spacing="1.2"
+              >
+                <rect x="40" y="10" width="120" height="30" fill="#0f1628" />
+                <text x="100" y="30" fill="#fff">USER</text>
+                <rect x="280" y="10" width="120" height="30" fill="#a678ff" />
+                <text x="340" y="30" fill="#fff">HELIXBOT</text>
+                <rect x="520" y="10" width="120" height="30" fill="#2db87a" />
+                <text x="580" y="30" fill="#fff">FLOWENGINE</text>
+              </g>
+
+              <!-- Lifelines (dashed) -->
+              <g stroke="#c8c8d0" stroke-width="1" stroke-dasharray="3 4">
+                <line x1="100" y1="40" x2="100" y2="330" />
+                <line x1="340" y1="40" x2="340" y2="330" />
+                <line x1="580" y1="40" x2="580" y2="330" />
+              </g>
+
+              <!-- Arrow defs -->
+              <defs>
+                <marker
+                  id="arrHead"
+                  viewBox="0 0 10 10"
+                  refX="9"
+                  refY="5"
+                  markerWidth="7"
+                  markerHeight="7"
+                  orient="auto"
+                >
+                  <path d="M0,0 L10,5 L0,10 Z" fill="#0f1628" />
+                </marker>
+                <marker
+                  id="arrHeadPurple"
+                  viewBox="0 0 10 10"
+                  refX="9"
+                  refY="5"
+                  markerWidth="7"
+                  markerHeight="7"
+                  orient="auto"
+                >
+                  <path d="M0,0 L10,5 L0,10 Z" fill="#a678ff" />
+                </marker>
+                <marker
+                  id="arrHeadGreen"
+                  viewBox="0 0 10 10"
+                  refX="9"
+                  refY="5"
+                  markerWidth="7"
+                  markerHeight="7"
+                  orient="auto"
+                >
+                  <path d="M0,0 L10,5 L0,10 Z" fill="#2db87a" />
+                </marker>
+              </defs>
+
+              <g font-family="Barlow, sans-serif" font-size="11.5" fill="#333">
+                <!-- Step 1: User -> HelixBot -->
+                <text
+                  x="100"
+                  y="68"
+                  font-weight="700"
+                  fill="#a678ff"
+                  font-size="10"
+                  letter-spacing="1"
+                >
+                  1
+                </text>
+                <line
+                  x1="100"
+                  y1="78"
+                  x2="335"
+                  y2="78"
+                  stroke="#0f1628"
+                  stroke-width="1.5"
+                  marker-end="url(#arrHead)"
+                />
+                <text x="218" y="72" text-anchor="middle">
+                  Types request in chat
+                </text>
+
+                <!-- HelixBot self-loop: collect info -->
+                <text
+                  x="340"
+                  y="108"
+                  font-weight="700"
+                  fill="#a678ff"
+                  font-size="10"
+                  letter-spacing="1"
+                  text-anchor="middle"
+                >
+                  2
+                </text>
+                <path
+                  d="M 340 118 C 400 118, 400 148, 340 148"
+                  fill="none"
+                  stroke="#a678ff"
+                  stroke-width="1.5"
+                  marker-end="url(#arrHeadPurple)"
+                />
+                <text x="408" y="136">
+                  Collects parameters via conversation
+                </text>
+
+                <!-- Step 3: HelixBot -> FlowEngine -->
+                <text
+                  x="340"
+                  y="178"
+                  font-weight="700"
+                  fill="#a678ff"
+                  font-size="10"
+                  letter-spacing="1"
+                  text-anchor="middle"
+                >
+                  3
+                </text>
+                <line
+                  x1="340"
+                  y1="188"
+                  x2="575"
+                  y2="188"
+                  stroke="#a678ff"
+                  stroke-width="1.5"
+                  marker-end="url(#arrHeadPurple)"
+                />
+                <text x="458" y="182" text-anchor="middle">
+                  POST webhook (JSON payload)
+                </text>
+
+                <!-- FlowEngine self-loop: execute -->
+                <text
+                  x="580"
+                  y="218"
+                  font-weight="700"
+                  fill="#a678ff"
+                  font-size="10"
+                  letter-spacing="1"
+                  text-anchor="middle"
+                >
+                  4
+                </text>
+                <path
+                  d="M 580 228 C 640 228, 640 258, 580 258"
+                  fill="none"
+                  stroke="#2db87a"
+                  stroke-width="1.5"
+                  marker-end="url(#arrHeadGreen)"
+                />
+                <text x="572" y="246" text-anchor="end">
+                  Routes &amp; executes workflow
+                </text>
+
+                <!-- Step 5: FlowEngine -> HelixBot (callback) -->
+                <text
+                  x="340"
+                  y="288"
+                  font-weight="700"
+                  fill="#a678ff"
+                  font-size="10"
+                  letter-spacing="1"
+                  text-anchor="middle"
+                >
+                  5
+                </text>
+                <line
+                  x1="575"
+                  y1="298"
+                  x2="345"
+                  y2="298"
+                  stroke="#2db87a"
+                  stroke-width="1.5"
+                  marker-end="url(#arrHeadGreen)"
+                />
+                <text x="458" y="292" text-anchor="middle">
+                  Callback URL (result payload)
+                </text>
+
+                <!-- Step 6: HelixBot -> User -->
+                <text
+                  x="100"
+                  y="318"
+                  font-weight="700"
+                  fill="#a678ff"
+                  font-size="10"
+                  letter-spacing="1"
+                  text-anchor="middle"
+                >
+                  6
+                </text>
+                <line
+                  x1="335"
+                  y1="328"
+                  x2="105"
+                  y2="328"
+                  stroke="#0f1628"
+                  stroke-width="1.5"
+                  marker-end="url(#arrHead)"
+                />
+                <text x="218" y="322" text-anchor="middle">
+                  Displays result in chat
+                </text>
+              </g>
+            </svg>
+            <div class="sequence-caption">
+              Bi-directional flow — one user request, two webhook calls between
+              HelixBot and FlowEngine.
+            </div>
+          </div>
+
           <div class="ws-heading">The Complete Flow</div>
           <p>
             What happens when a user types
@@ -616,7 +905,8 @@
                 <td>
                   HelixBot packages all inputs and session context into the JSON
                   format FlowEngine expects. A mapping script handles the
-                  translation automatically.
+                  translation automatically — it ships with the pre-built
+                  templates, so you don't write it yourself.
                 </td>
               </tr>
               <tr>
@@ -667,12 +957,21 @@
         <hr class="part-divider" />
 
         <div class="ws-section">
+          <div class="sample-label">Sample 2 of 2</div>
           <div class="part-heading">
             Configure the ITSM Platform Reverse Connection
           </div>
           <div class="part-meta">
             Procedural guide &nbsp;·&nbsp; Estimated time: 15–20 minutes
             &nbsp;·&nbsp; Audience: ITSM Platform admins
+          </div>
+
+          <div class="bridge-note">
+            <strong>Context:</strong> This second sample covers a different
+            integration in the same playbook. The ITSM Platform here is a
+            separate back-end system from FlowEngine — HelixBot is the common
+            front end, but this guide wires it to a ticketing system rather than
+            a workflow engine.
           </div>
 
           <p>
@@ -718,6 +1017,16 @@
                   >Open the Helix Integration Settings module</span
                 >
               </div>
+              <div class="callout warn">
+                <div class="callout-label">
+                  Check your application scope first
+                </div>
+                If you're in the wrong application scope, the Helix fields will
+                not appear in the form — and you won't be able to save settings.
+                Before proceeding, look for a scope banner at the top of the
+                ITSM Platform and switch to the
+                <strong>Helix</strong> application scope if prompted.
+              </div>
               <ol>
                 <li>
                   In the ITSM Platform Navigator, type: <code>Helix</code>
@@ -734,6 +1043,12 @@
                 <span class="step-title"
                   >Enter HelixBot connection credentials</span
                 >
+              </div>
+              <div class="callout info">
+                <div class="callout-label">Case sensitive</div>
+                All three values below are case-sensitive. Copy them exactly as
+                shown — including lowercase, punctuation, and the trailing slash
+                on the URL.
               </div>
               <table class="cred-table">
                 <thead>
@@ -755,14 +1070,16 @@
                   </tr>
                   <tr>
                     <td>Base URL</td>
-                    <td>
-                      <code
-                        >https://&#123;tenant&#125;.helix-platform.com/</code
-                      >
-                    </td>
+                    <td>See copyable format below</td>
                   </tr>
                 </tbody>
               </table>
+              <div class="code-block-wrap">
+                <span class="code-block-label">Base URL format</span>
+                <code class="code-block"
+                  >https://&#123;tenant&#125;.helix-platform.com/</code
+                >
+              </div>
               <div class="callout warn">
                 <div class="callout-label">Don't forget the trailing slash</div>
                 A missing trailing slash is the most common cause of connection
@@ -901,20 +1218,6 @@
                 Verify the ITSM Platform instance can reach external URLs.
               </li>
               <li>Contact your network admin if needed.</li>
-            </ul>
-          </div>
-
-          <div class="trouble-item">
-            <div class="trouble-title">Cannot save settings</div>
-            <div class="trouble-cause">Cause: Wrong application scope</div>
-            <ul class="trouble-fix">
-              <li>
-                Look for a banner prompting you to switch application scope.
-              </li>
-              <li>
-                Switch to the Helix application scope, re-enter settings, and
-                save.
-              </li>
             </ul>
           </div>
 

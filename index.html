@@ -152,12 +152,12 @@
           #7a5200 100%
         );
       }
-      .thumb-video {
+      .thumb-tutorial {
         background: linear-gradient(
           135deg,
-          #1a0a0a 0%,
-          #3d1010 50%,
-          #6e1a1a 100%
+          #160a2e 0%,
+          #2d1555 50%,
+          #4e2a8f 100%
         );
       }
 
@@ -185,7 +185,7 @@
         border-top-color: #ffb347;
       }
       .card:nth-child(4) .card-body {
-        border-top-color: #ff6b6b;
+        border-top-color: #a678ff;
       }
 
       .card-tag {
@@ -203,7 +203,7 @@
         color: #ffb347;
       }
       .card:nth-child(4) .card-tag {
-        color: #ff6b6b;
+        color: #a678ff;
       }
 
       .card-title {
@@ -425,38 +425,71 @@
         </div>
       </a>
 
-      <!-- 4. Video Script -->
-      <a class="card" href="./pages/googlevideo.html">
-        <div class="card-thumb thumb-video">
+      <!-- 4. Integration Tutorial -->
+      <a class="card" href="./pages/tutorial.html">
+        <div class="card-thumb thumb-tutorial">
           <svg
             class="thumb-svg"
             viewBox="0 0 64 64"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <rect
-              x="8"
-              y="16"
-              width="36"
-              height="28"
-              rx="3"
-              stroke="white"
-              stroke-width="2"
-            />
             <path
-              d="M44 24l12-6v24l-12-6V24Z"
+              d="M12 8 L44 8 L54 18 L54 56 L12 56 Z"
               stroke="white"
               stroke-width="2"
               stroke-linejoin="round"
             />
-            <path d="M20 26l10 6-10 6V26Z" fill="white" opacity="0.5" />
+            <path
+              d="M44 8 L44 18 L54 18"
+              stroke="white"
+              stroke-width="2"
+              stroke-linejoin="round"
+            />
+            <rect x="18" y="26" width="5" height="5" fill="white" />
+            <path
+              d="M27 28.5 L48 28.5"
+              stroke="white"
+              stroke-width="1.5"
+              stroke-linecap="round"
+            />
+            <rect
+              x="18"
+              y="36"
+              width="5"
+              height="5"
+              stroke="white"
+              stroke-width="1.5"
+            />
+            <path
+              d="M27 38.5 L42 38.5"
+              stroke="white"
+              stroke-width="1.5"
+              stroke-linecap="round"
+            />
+            <rect
+              x="18"
+              y="46"
+              width="5"
+              height="5"
+              stroke="white"
+              stroke-width="1.5"
+            />
+            <path
+              d="M27 48.5 L48 48.5"
+              stroke="white"
+              stroke-width="1.5"
+              stroke-linecap="round"
+            />
           </svg>
         </div>
         <div class="card-body">
-          <div class="card-tag">Video Script · Technical Explainer</div>
-          <div class="card-title">The benefits of using version control</div>
+          <div class="card-tag">Technical Writing · Systems Integration</div>
+          <div class="card-title">
+            Writing a runbook to pass data between two systems
+          </div>
           <div class="card-cta">
-            View Script
+            Read Tutorial
             <svg viewBox="0 0 14 14" fill="none">
               <path
                 d="M1 7h12M8 2l5 5-5 5"
